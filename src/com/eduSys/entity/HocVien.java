@@ -9,9 +9,11 @@ package com.eduSys.entity;
  * @author LENOVO T560
  */
 public class HocVien {
+
     private Integer maHV;
     private Integer maKH;
     private String maNH;
+    private float diem;
 
     public Integer getMaHV() {
         return maHV;
@@ -44,11 +46,9 @@ public class HocVien {
     public void setDiem(float diem) {
         this.diem = diem;
     }
-    private float diem;
 
     public HocVien() {
     }
-    
 
     public HocVien(Integer maHV, Integer maKH, String maNH, float diem) {
         this.maHV = maHV;
@@ -56,7 +56,5 @@ public class HocVien {
         this.maNH = maNH;
         this.diem = diem;
     }
-    
-    
-    
+
 }

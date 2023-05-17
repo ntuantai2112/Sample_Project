@@ -32,7 +32,7 @@ public class NhanVienDAO extends EduSysDAO<NhanVien, String> {
         try {
             JdbcHalper.update(INSERT_SQL, entity.getMaNV(), entity.getHoTen(), entity.getMatKhau(), entity.isVaiTro());
         } catch (SQLException ex) {
-            Logger.getLogger(NhanVienDAO.class.getName()).log(Level.SEVERE, null, ex);
+             ex.printStackTrace();
         }
     }
     // Hàm sửa NV
