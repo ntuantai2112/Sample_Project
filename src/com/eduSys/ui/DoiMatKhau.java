@@ -4,6 +4,12 @@
  */
 package com.eduSys.ui;
 
+import com.eduSys.dao.NhanVienDAO;
+import com.eduSys.entity.NhanVien;
+import com.eduSys.poly.utils.Auth;
+import com.eduSys.poly.utils.MsgBox;
+import com.edusys.poly.utils.XImage;
+
 /**
  *
  * @author LENOVO T560
@@ -15,6 +21,7 @@ public class DoiMatKhau extends javax.swing.JFrame {
      */
     public DoiMatKhau() {
         initComponents();
+        init();
     }
 
     /**
@@ -62,9 +69,19 @@ public class DoiMatKhau extends javax.swing.JFrame {
 
         btnDongY.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/eduSys/File_Hinh_Anh/repost.png"))); // NOI18N
         btnDongY.setText("Đồng ý");
+        btnDongY.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDongYActionPerformed(evt);
+            }
+        });
 
         btnHuyBo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/eduSys/File_Hinh_Anh/prohibition (3).png"))); // NOI18N
         btnHuyBo.setText("Hủy bỏ");
+        btnHuyBo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHuyBoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,14 +99,13 @@ public class DoiMatKhau extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(layout.createSequentialGroup()
                                     .addComponent(txtMatKhauMoi)
-                                    .addGap(61, 61, 61)))
+                                    .addGap(61, 61, 61))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(63, 63, 63)))
@@ -135,6 +151,16 @@ public class DoiMatKhau extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    // Nút hủy bỏ chức năng đổi mật khẩu
+    private void btnHuyBoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyBoActionPerformed
+        // TODO add your handling code here:
+        huyBo();
+    }//GEN-LAST:event_btnHuyBoActionPerformed
+    // Nút chức năng đổi mật khẩu
+    private void btnDongYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongYActionPerformed
+        // TODO add your handling code here:
+        doiMatKhau();
+    }//GEN-LAST:event_btnDongYActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,4 +211,46 @@ public class DoiMatKhau extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtMatKhauMoi;
     private javax.swing.JPasswordField txtXacNhanMK;
     // End of variables declaration//GEN-END:variables
+
+    // Chức năng khởi tạo chương trình khi chạy
+    private void init() {
+        setLocationRelativeTo(null);
+        this.setIconImage(XImage.getAppIcon());
+    }
+
+    // Lớp NhanVienDAO
+    NhanVienDAO nvDAO = new NhanVienDAO();
+
+    //Chức năng đổi mật khẩu
+    private void doiMatKhau() {
+        String maNV = txtMaNV.getText();
+        String matKhauHT = new String(txtMatKhauHT.getPassword());
+        String matKhauMoi = new String(txtMatKhauMoi.getPassword());
+        String xacNhanMatKhau = new String(txtXacNhanMK.getPassword());
+
+        NhanVien nv = nvDAO.sellectById(maNV);
+        // Trườn hợp sao tên đăng hợp
+        if (!maNV.equalsIgnoreCase(Auth.user.getMaNV())) {
+            MsgBox.alert(this, "Sai tên đăng nhập!");
+            // Trường hợp sai mật khẩu
+        } else if (!matKhauMoi.equals(Auth.user.getMatKhau())) {
+            MsgBox.alert(this, "Sai mặt khẩu đăng nhập!");
+            // Trường hợp k đúng tài khoản, lưu vào biến user
+        } else if (!matKhauMoi.equals(xacNhanMatKhau)) {
+            MsgBox.alert(this, "Xác nhận mật khẩu không thành công!");
+        } else {
+            Auth.user.setMatKhau(matKhauMoi);
+            nvDAO.update(Auth.user);
+            MsgBox.alert(this, "Đổi mật thành công!");
+            this.dispose();
+        }
+
+    }
+
+    // Chức năng hủy bỏ
+    private void huyBo() {
+        this.dispose();
+
+    }
+
 }

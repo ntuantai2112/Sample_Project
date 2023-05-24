@@ -4,6 +4,10 @@
  */
 package com.eduSys.ui;
 
+import com.eduSys.dao.NhanVienDAO;
+import com.eduSys.entity.NhanVien;
+import com.eduSys.poly.utils.Auth;
+import com.eduSys.poly.utils.MsgBox;
 import com.edusys.poly.utils.XImage;
 
 /**
@@ -51,9 +55,19 @@ public class Login extends javax.swing.JDialog {
 
         btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/eduSys/File_Hinh_Anh/key.png"))); // NOI18N
         btnLogin.setText("Đăng Nhập");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
         btnEnd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/eduSys/File_Hinh_Anh/logout (1).png"))); // NOI18N
         btnEnd.setText("Kết Thúc");
+        btnEnd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEndActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,6 +112,17 @@ public class Login extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    // Nút thoát khỏi giao diện
+    private void btnEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndActionPerformed
+        end();
+
+    }//GEN-LAST:event_btnEndActionPerformed
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        // TODO add your handling code here:
+        login();
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,10 +176,39 @@ public class Login extends javax.swing.JDialog {
     private javax.swing.JTextField txtUser_Name;
     // End of variables declaration//GEN-END:variables
 
+    // Chức năng khởi tạo chương trình khi chạy
     private void init() {
-          setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
         this.setIconImage(XImage.getAppIcon());
     }
+
+    // Lớp NhanVienDAO
+    NhanVienDAO nvDAO = new NhanVienDAO();
+
+    //Chức năng đặng nhập
+    private void login() {
+        String maNV = txtUser_Name.getText();
+        String matKhau = new String(txtPassword.getPassword());
+
+        NhanVien nv = nvDAO.sellectById(maNV);
+        // Trườn hợp sao tên đăng hợp
+        if (nv == null) {
+            MsgBox.alert(this, "Sai tên đăng nhập!");
+            // Trường hợp sai mật khẩu
+        } else if (!matKhau.equalsIgnoreCase(nv.getMatKhau())) {
+            MsgBox.alert(this, "Sai mặt khẩu đăng nhập!");
+            // Trường hợp k đúng tài khoản, lưu vào biến user
+        } else {
+            Auth.user = nv;
+            this.dispose();
+        }
+
+    }
+
+    // Chức năng kết thúc chương trình
+    private void end() {
+        if (MsgBox.confirm(this, "Bạn có chắc chắn muốn hủy bỏ")) {
+            System.exit(0);
+        }
+    }
 }
-
-

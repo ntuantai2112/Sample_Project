@@ -25,16 +25,17 @@ public class NhanVienDAO extends EduSysDAO<NhanVien, String> {
     String DELETE_SQL = "DELETE FROM nhanvien WHERE MaNV = ?  ";
     String SELECT_ALL = "SELECT * FROM nhanvien";
     String SELECT_BY_ID_SQL = "SELECT * FROM nhanvien WHERE MANV = ?";
-    
+
     // Hàm thêm nhân viên
     @Override
     public void insert(NhanVien entity) {
         try {
             JdbcHalper.update(INSERT_SQL, entity.getMaNV(), entity.getHoTen(), entity.getMatKhau(), entity.isVaiTro());
         } catch (SQLException ex) {
-             ex.printStackTrace();
+            ex.printStackTrace();
         }
     }
+
     // Hàm sửa NV
     @Override
     public void update(NhanVien entity) {

@@ -4,9 +4,15 @@
  */
 package com.eduSys.ui;
 
+import com.eduSys.entity.NhanVien;
+import com.eduSys.entity.ThongKe;
+import com.eduSys.poly.utils.Auth;
+import com.eduSys.poly.utils.MsgBox;
 import com.edusys.poly.utils.XImage;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.Timer;
@@ -75,7 +81,7 @@ public class EduSysFrame extends javax.swing.JFrame {
         jSeparator15 = new javax.swing.JPopupMenu.Separator();
         mniEmployee = new javax.swing.JMenuItem();
         mniTranscrip = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        mni_Transcript = new javax.swing.JMenuItem();
         jSeparator16 = new javax.swing.JPopupMenu.Separator();
         mniNumber_Learner = new javax.swing.JMenuItem();
         jSeparator17 = new javax.swing.JPopupMenu.Separator();
@@ -83,7 +89,7 @@ public class EduSysFrame extends javax.swing.JFrame {
         jSeparator18 = new javax.swing.JPopupMenu.Separator();
         mniRevenue = new javax.swing.JMenuItem();
         mniUser_Manual = new javax.swing.JMenu();
-        jMenuItem14 = new javax.swing.JMenuItem();
+        mni_Instruct = new javax.swing.JMenuItem();
         jSeparator19 = new javax.swing.JPopupMenu.Separator();
         mniProduct_Introduction = new javax.swing.JMenuItem();
 
@@ -322,15 +328,15 @@ public class EduSysFrame extends javax.swing.JFrame {
         mniTranscrip.setText("Thống Kê");
         mniTranscrip.setMargin(new java.awt.Insets(5, 20, 5, 20));
 
-        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
-        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/eduSys/File_Hinh_Anh/transcript.png"))); // NOI18N
-        jMenuItem5.setText("Bảng Điểm");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        mni_Transcript.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        mni_Transcript.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/eduSys/File_Hinh_Anh/transcript.png"))); // NOI18N
+        mni_Transcript.setText("Bảng Điểm");
+        mni_Transcript.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                mni_TranscriptActionPerformed(evt);
             }
         });
-        mniTranscrip.add(jMenuItem5);
+        mniTranscrip.add(mni_Transcript);
         mniTranscrip.add(jSeparator16);
 
         mniNumber_Learner.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
@@ -370,16 +376,16 @@ public class EduSysFrame extends javax.swing.JFrame {
         mniUser_Manual.setText("Trợ Giúp");
         mniUser_Manual.setMargin(new java.awt.Insets(5, 8, 5, 8));
 
-        jMenuItem14.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/eduSys/File_Hinh_Anh/planet-earth.png"))); // NOI18N
-        jMenuItem14.setText("Hướng Dẫn Sử Dụng");
-        jMenuItem14.setMargin(new java.awt.Insets(5, 8, 5, 8));
-        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+        mni_Instruct.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mni_Instruct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/eduSys/File_Hinh_Anh/planet-earth.png"))); // NOI18N
+        mni_Instruct.setText("Hướng Dẫn Sử Dụng");
+        mni_Instruct.setMargin(new java.awt.Insets(5, 8, 5, 8));
+        mni_Instruct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem14ActionPerformed(evt);
+                mni_InstructActionPerformed(evt);
             }
         });
-        mniUser_Manual.add(jMenuItem14);
+        mniUser_Manual.add(mni_Instruct);
         mniUser_Manual.add(jSeparator19);
 
         mniProduct_Introduction.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -421,64 +427,67 @@ public class EduSysFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Bút chức năng đổi mật khẩu
     private void minChane_PasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minChane_PasswordActionPerformed
-        // TODO add your handling code here:
+        openDoiMatKhau();
     }//GEN-LAST:event_minChane_PasswordActionPerformed
 
     private void mniEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniEndActionPerformed
-        // TODO add your handling code here:
+        ketThuc();
     }//GEN-LAST:event_mniEndActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    // Nút chức năng đăng xuất
     private void mniLog_outActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniLog_outActionPerformed
-        // TODO add your handling code here:
+        dangXuat();
     }//GEN-LAST:event_mniLog_outActionPerformed
 
+    // Nút chức năng mở chuyên đề
     private void mniThematicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniThematicActionPerformed
-        // TODO add your handling code here:
+        openChuyenDe();
     }//GEN-LAST:event_mniThematicActionPerformed
-
+    // Nút chức năng mở Khóa học
     private void mniCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCourseActionPerformed
-        // TODO add your handling code here:
+        openKhoaHoc();
     }//GEN-LAST:event_mniCourseActionPerformed
-
+    // Nút chức năng mở người học
     private void mniLearnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniLearnerActionPerformed
-        // TODO add your handling code here:
+        openNguoiHoc();
     }//GEN-LAST:event_mniLearnerActionPerformed
-
+    // Nút chức năng mở học viên
     private void mniStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniStudentActionPerformed
-        // TODO add your handling code here:
+        openHocVien();
     }//GEN-LAST:event_mniStudentActionPerformed
-
+    // Nút chức năng mở nhân viên
     private void mniEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniEmployeeActionPerformed
-        // TODO add your handling code here:
+        openNhanVien();
     }//GEN-LAST:event_mniEmployeeActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    private void mni_TranscriptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_TranscriptActionPerformed
+        new ThongKeJDiolog().selectTab(0);
+    }//GEN-LAST:event_mni_TranscriptActionPerformed
 
     private void mniNumber_LearnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniNumber_LearnerActionPerformed
-        // TODO add your handling code here:
+         new ThongKeJDiolog().selectTab(1);
     }//GEN-LAST:event_mniNumber_LearnerActionPerformed
 
     private void mniThemetic_PointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniThemetic_PointActionPerformed
-        // TODO add your handling code here:
+         new ThongKeJDiolog().selectTab(2);
     }//GEN-LAST:event_mniThemetic_PointActionPerformed
 
     private void mniRevenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniRevenueActionPerformed
-        // TODO add your handling code here:
+         new ThongKeJDiolog().selectTab(3);
     }//GEN-LAST:event_mniRevenueActionPerformed
 
-    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem14ActionPerformed
+    private void mni_InstructActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_InstructActionPerformed
+        openHuongDan();
+    }//GEN-LAST:event_mni_InstructActionPerformed
 
     private void mniProduct_IntroductionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniProduct_IntroductionActionPerformed
-        // TODO add your handling code here:
+        openGioiThieu();
     }//GEN-LAST:event_mniProduct_IntroductionActionPerformed
 
     /**
@@ -529,9 +538,7 @@ public class EduSysFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator10;
@@ -569,16 +576,24 @@ public class EduSysFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem mniThemetic_Point;
     private javax.swing.JMenu mniTranscrip;
     private javax.swing.JMenu mniUser_Manual;
+    private javax.swing.JMenuItem mni_Instruct;
+    private javax.swing.JMenuItem mni_Transcript;
     // End of variables declaration//GEN-END:variables
 
     // Hàm khởi tạo khi chạy
     private void init() {
         setLocationRelativeTo(null);
         this.setIconImage(XImage.getAppIcon());
-        new  ChaoJDialog(this,true).setVisible(true);
-        new  Login(this,true).setVisible(true);
+//        new ChaoJDialog(this, true).setVisible(true);
+//        new Login(this, true).setVisible(true);
+        startDongHo();
+        
+    }
+
+    // Hàm chạy đồng  hồ
+    private void startDongHo() {
         // Lấy thời gian hệ thống hiển thị lên trên màn hình
-          new Timer(1000, new ActionListener() {
+        new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Date now = new Date();
@@ -588,5 +603,110 @@ public class EduSysFrame extends javax.swing.JFrame {
                 
             }
         }).start();
+    }
+
+    // Hàm mở đổi mật khẩu
+    private void openDoiMatKhau() {
+        if (Auth.isLogin()) {
+            new DoiMatKhau().setVisible(true);
+        } else {
+            MsgBox.alert(this, "Vui lòng đăng nhập!");
+        }
+    }
+
+    // Hàm  đăng xuất - chức năng đăng xuất
+    private void dangXuat() {
+        Auth.clear();
+        new Login(this, true).setVisible(true);
+    }
+
+    // Hàm  kết thúc - chức năng kết thúc
+    private void ketThuc() {
+        if (MsgBox.confirm(this, "Bạn có chắc chắn muốn thoát không ?")) {
+            System.exit(0);
+        }
+    }
+    // Hàm open Nhân Viên
+
+    private void openNhanVien() {
+        if (Auth.isLogin()) {
+            new QuanLyNhanVien().setVisible(true);
+        } else {
+            MsgBox.alert(this, "Vui lòng đăng nhập vào hệ thống!");
+        }
+        
+    }
+    // Hàm open Khóa học
+
+    private void openKhoaHoc() {
+        
+        if (Auth.isLogin()) {
+            new QuanLyKhoaHoc().setVisible(true);
+        } else {
+            MsgBox.alert(this, "Vui lòng đăng nhập vào hệ thống!");
+        }
+    }
+    // Hàm open Chuyên Đề
+
+    private void openChuyenDe() {
+        
+        if (Auth.isLogin()) {
+            new QuanLyChuyenDe().setVisible(true);
+        } else {
+            MsgBox.alert(this, "Vui lòng đăng nhập vào hệ thống!");
+        }
+        
+    }
+    // Hàm open Người Học
+
+    private void openNguoiHoc() {
+        
+        if (Auth.isLogin()) {
+            new QuanLyNguoiHoc(this, true).setVisible(true);
+        } else {
+            MsgBox.alert(this, "Vui lòng đăng nhập vào hệ thống!");
+        }
+    }
+    // Hàm open Học Viên
+
+    private void openHocVien() {
+        
+        if (Auth.isLogin()) {
+            new QuanLyHocVien().setVisible(true);
+        } else {
+            MsgBox.alert(this, "Vui lòng đăng nhập vào hệ thống!");
+        }
+    }
+    // Hàm open Thống Kê
+
+    private void openThongKe(int index) {
+        if (Auth.isLogin()) {
+            if (index == 3 && !Auth.isManager()) {
+                MsgBox.alert(this, "Bạn không có quyền xem thông tin doanh thu");
+            } else {
+                ThongKeJDiolog tkwin = new ThongKeJDiolog();
+                tkwin.setVisible(true);
+                tkwin.selectTab(index);
+            }
+            
+        } else {
+            MsgBox.alert(this, "Vui lòng đăng nhập!");
+        }
+        
+    }
+    // Hàm open Giới thiệu
+
+    private void openGioiThieu() {
+        new ChaoJDialog(this, true).setVisible(true);
+    }
+    // Hàm open Hướng dẫn
+
+    private void openHuongDan() {
+        try {
+            Desktop.getDesktop().browse(new File("help/index.html").toURI());
+        } catch (Exception e) {
+            MsgBox.alert(this, "Không tìm thấy file hướng dẫn!");
+        }
+        
     }
 }
