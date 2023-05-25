@@ -23,8 +23,8 @@ public class NhanVienDAO extends EduSysDAO<NhanVien, String> {
     String INSERT_SQL = "INSERT INTO nhanvien (MaNV, MatKhau, HoTen, Vaitro) VALUES (?, ?, ?, ?)";
     String UPDATE_SQL = "UPDATE nhanvien SET MatKhau = ?, HoTen = ?, Vaitro = ? WHERE MaNV = ?";
     String DELETE_SQL = "DELETE FROM nhanvien WHERE MaNV = ?  ";
-    String SELECT_ALL = "SELECT * FROM nhanvien";
-    String SELECT_BY_ID_SQL = "SELECT * FROM nhanvien WHERE MANV = ?";
+    String SELECT_ALL = "SELECT MANV,MATKHAU,HOTEN,VAITRO FROM NHANVIEN";
+    String SELECT_BY_ID_SQL = "SELECT MaNV,MatKhau,HoTen,VaiTro FROM nhanvien WHERE MANV = ?";
 
     // Hàm thêm nhân viên
     @Override
@@ -78,9 +78,10 @@ public class NhanVienDAO extends EduSysDAO<NhanVien, String> {
             while (rs.next()) {
                 NhanVien nv = new NhanVien();
                 nv.setMaNV(rs.getString("MaNV"));
-                nv.setHoTen(rs.getString("HoTen"));
                 nv.setMatKhau(rs.getString("MatKhau"));
+                nv.setHoTen(rs.getString("HoTen"));
                 nv.setVaiTro(rs.getBoolean("VaiTro"));
+                
 
                 listNV.add(nv);
             }

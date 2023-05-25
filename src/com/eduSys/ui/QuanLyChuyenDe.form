@@ -131,10 +131,9 @@
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jPanel3" min="-2" pref="340" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jPanel4" min="-2" pref="346" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <Component id="jPanel3" min="-2" pref="313" max="-2" attributes="0"/>
+                                      <EmptySpace pref="66" max="32767" attributes="0"/>
+                                      <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
@@ -171,12 +170,14 @@
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="63" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jScrollPane2" min="-2" pref="63" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                              <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -260,23 +261,40 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnSua">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
                     <Property name="selected" type="boolean" value="true"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSuaActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnXoa">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
+                    <Property name="focusCycleRoot" type="boolean" value="true"/>
+                    <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
+                    <Property name="hideActionText" type="boolean" value="true"/>
+                    <Property name="inheritsPopupMenu" type="boolean" value="true"/>
+                    <Property name="opaque" type="boolean" value="true"/>
                     <Property name="selected" type="boolean" value="true"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXoaActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnMoi">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="M&#x1edb;i"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMoiActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -289,24 +307,36 @@
                     <Property name="text" type="java.lang.String" value="|&lt;"/>
                     <Property name="selected" type="boolean" value="true"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFirstActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnPrev">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&lt;&lt;"/>
                     <Property name="selected" type="boolean" value="true"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrevActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnNext">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&gt;&gt;"/>
                     <Property name="selected" type="boolean" value="true"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNextActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnLast">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&gt;|"/>
                     <Property name="selected" type="boolean" value="true"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLastActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

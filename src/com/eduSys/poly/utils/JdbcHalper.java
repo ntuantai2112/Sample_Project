@@ -22,6 +22,7 @@ public class JdbcHalper {
     public static final String USERNAME = "sa";
     public static final String PASSWORD = "123456";
 
+    // Hàm getConnection kết nối với cơ sở dữ liệu
     public static Connection getConnection() {
 
         // Create a variable for the connection string.
@@ -41,9 +42,12 @@ public class JdbcHalper {
         return null;
     }
 
-    // Truy vấn, Hàm này thực hiện các câu lệnh truy vấn
+    // Truy vấn, Hàm này thực hiện các câu lệnh truy vấn 
     public static PreparedStatement getStmt(String sql, Object... args) throws SQLException {
-        Connection conn = DriverManager.getConnection(sql, sql, PASSWORD);
+        // Create a variable for the connection string.
+        String connectionUrl = "jdbc:sqlserver://" + HOSTNAME + ":" + PORT + ";"
+                + "databaseName=" + DBNAME + ";encrypt=true;trustServerCertificate=true;";
+        Connection conn = DriverManager.getConnection(connectionUrl, USERNAME, PASSWORD);
         // PreparedStatement
         PreparedStatement stmt;
         if (sql.trim().startsWith("{")) {

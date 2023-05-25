@@ -51,7 +51,7 @@ public class QuanLyKhoaHoc extends javax.swing.JFrame {
         btnSua = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         btnMoi = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
         btnFirst = new javax.swing.JButton();
         btnPrev = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
@@ -115,10 +115,12 @@ public class QuanLyKhoaHoc extends javax.swing.JFrame {
         jPanel4.add(btnThem);
 
         btnSua.setText("Sửa");
+        btnSua.setEnabled(false);
         btnSua.setSelected(true);
         jPanel4.add(btnSua);
 
         btnXoa.setText("Xóa");
+        btnXoa.setEnabled(false);
         btnXoa.setSelected(true);
         jPanel4.add(btnXoa);
 
@@ -126,20 +128,24 @@ public class QuanLyKhoaHoc extends javax.swing.JFrame {
         jPanel4.add(btnMoi);
 
         btnFirst.setText("|<");
+        btnFirst.setEnabled(false);
         btnFirst.setSelected(true);
-        jPanel5.add(btnFirst);
+        jPanel6.add(btnFirst);
 
         btnPrev.setText("<<");
+        btnPrev.setEnabled(false);
         btnPrev.setSelected(true);
-        jPanel5.add(btnPrev);
+        jPanel6.add(btnPrev);
 
         btnNext.setText(">>");
+        btnNext.setEnabled(false);
         btnNext.setSelected(true);
-        jPanel5.add(btnNext);
+        jPanel6.add(btnNext);
 
         btnLast.setText(">|");
+        btnLast.setEnabled(false);
         btnLast.setSelected(true);
-        jPanel5.add(btnLast);
+        jPanel6.add(btnLast);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -186,8 +192,9 @@ public class QuanLyKhoaHoc extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 21, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,13 +224,14 @@ public class QuanLyKhoaHoc extends javax.swing.JFrame {
                     .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -324,7 +332,7 @@ public class QuanLyKhoaHoc extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane tabs;

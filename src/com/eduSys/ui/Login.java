@@ -118,7 +118,8 @@ public class Login extends javax.swing.JDialog {
         end();
 
     }//GEN-LAST:event_btnEndActionPerformed
-
+    
+    // Nút chức năng đăng nhập
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
         login();
@@ -201,6 +202,7 @@ public class Login extends javax.swing.JDialog {
         } else {
             Auth.user = nv;
             this.dispose();
+           
         }
 
     }

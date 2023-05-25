@@ -22,7 +22,7 @@ public class ChuyenDeDAO extends EduSysDAO<ChuyenDe, String> {
     String INSERT_SQL = "INSERT INTO CHUYENDE(MACD,TENCD,HOCPHI,THOILUONG,HINHLOGO,MOTACD) VALUES(?,?,?,?,?,?)";
     String UPDATE_SQL = "UPDATE ChuyenDe SET TENCD = ?, HOCPHI = ?, THOILUONG = ?,HINHLOGO = ?,MOTACD = ? WHERE MACD = ?";
     String DELETE_SQL = "DELETE FROM ChuyenDe WHERE MACD = ?  ";
-    String SELECT_ALL = "SELECT * FROM ChuyenDe";
+    String SELECT_ALL = "SELECT MACD,TENCD,HOCPHI,THOILUONG,HINHLOGO,MOTACD FROM CHUYENDE";
     String SELECT_BY_ID_SQL = "SELECT * FROM ChuyenDe WHERE MACD = ?";
 
     @Override
@@ -80,7 +80,7 @@ public class ChuyenDeDAO extends EduSysDAO<ChuyenDe, String> {
                 cd.setHocPhi(rs.getFloat("HocPhi"));
                 cd.setThoiLuong(rs.getInt("ThoiLuong"));
                 cd.setHinhLogo(rs.getString("HinhLogo"));
-                cd.setMoTaChuyenDe(rs.getString("MoTaChuyenDe"));
+                cd.setMoTaChuyenDe(rs.getString("MOTACD"));
 
                 listCD.add(cd);
             }

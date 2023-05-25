@@ -282,7 +282,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
+                              <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -322,13 +322,15 @@
                           <Component id="txtEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jScrollPane3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-                          <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jScrollPane3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="64" max="32767" attributes="0"/>
                   </Group>
@@ -424,12 +426,14 @@
                 <Component class="javax.swing.JButton" name="btnSua">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="selected" type="boolean" value="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnXoa">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="selected" type="boolean" value="true"/>
                   </Properties>
                 </Component>
@@ -440,31 +444,35 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="jPanel5">
+            <Container class="javax.swing.JPanel" name="jPanel6">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
               <SubComponents>
                 <Component class="javax.swing.JButton" name="btnFirst">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="|&lt;"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="selected" type="boolean" value="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnPrev">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&lt;&lt;"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="selected" type="boolean" value="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnNext">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&gt;&gt;"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="selected" type="boolean" value="true"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnLast">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&gt;|"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="selected" type="boolean" value="true"/>
                   </Properties>
                 </Component>

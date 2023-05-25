@@ -108,6 +108,11 @@ public class EduSysFrame extends javax.swing.JFrame {
         btnLog_Out.setMargin(new java.awt.Insets(0, 10, 0, 10));
         btnLog_Out.setMaximumSize(new java.awt.Dimension(90, 46));
         btnLog_Out.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnLog_Out.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLog_OutActionPerformed(evt);
+            }
+        });
         jToolBar2.add(btnLog_Out);
         jToolBar2.add(jSeparator5);
 
@@ -118,6 +123,11 @@ public class EduSysFrame extends javax.swing.JFrame {
         btnEnd.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEnd.setMargin(new java.awt.Insets(0, 18, 0, 18));
         btnEnd.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEnd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEndActionPerformed(evt);
+            }
+        });
         jToolBar2.add(btnEnd);
         jToolBar2.add(jSeparator9);
 
@@ -128,6 +138,11 @@ public class EduSysFrame extends javax.swing.JFrame {
         btnThematic.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnThematic.setMargin(new java.awt.Insets(0, 18, 0, 18));
         btnThematic.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnThematic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThematicActionPerformed(evt);
+            }
+        });
         jToolBar2.add(btnThematic);
         jToolBar2.add(jSeparator2);
 
@@ -138,6 +153,11 @@ public class EduSysFrame extends javax.swing.JFrame {
         btnLearner.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnLearner.setMargin(new java.awt.Insets(0, 18, 0, 18));
         btnLearner.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnLearner.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLearnerActionPerformed(evt);
+            }
+        });
         jToolBar2.add(btnLearner);
         jToolBar2.add(jSeparator8);
 
@@ -148,6 +168,11 @@ public class EduSysFrame extends javax.swing.JFrame {
         btnCourse.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCourse.setMargin(new java.awt.Insets(0, 18, 0, 18));
         btnCourse.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnCourse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCourseActionPerformed(evt);
+            }
+        });
         jToolBar2.add(btnCourse);
         jToolBar2.add(jSeparator7);
 
@@ -158,6 +183,11 @@ public class EduSysFrame extends javax.swing.JFrame {
         btnStudent.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnStudent.setMargin(new java.awt.Insets(0, 18, 0, 18));
         btnStudent.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStudentActionPerformed(evt);
+            }
+        });
         jToolBar2.add(btnStudent);
         jToolBar2.add(jSeparator4);
 
@@ -168,6 +198,11 @@ public class EduSysFrame extends javax.swing.JFrame {
         btnInstruct.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnInstruct.setMargin(new java.awt.Insets(0, 18, 0, 18));
         btnInstruct.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnInstruct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInstructActionPerformed(evt);
+            }
+        });
         jToolBar2.add(btnInstruct);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/eduSys/File_Hinh_Anh/letter-i.png"))); // NOI18N
@@ -489,6 +524,41 @@ public class EduSysFrame extends javax.swing.JFrame {
     private void mniProduct_IntroductionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniProduct_IntroductionActionPerformed
         openGioiThieu();
     }//GEN-LAST:event_mniProduct_IntroductionActionPerformed
+    
+    private void btnLog_OutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLog_OutActionPerformed
+        // TODO add your handling code here:
+        dangXuat();
+    }//GEN-LAST:event_btnLog_OutActionPerformed
+
+    private void btnEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEndActionPerformed
+        // TODO add your handling code here:
+        ketThuc();
+    }//GEN-LAST:event_btnEndActionPerformed
+
+    private void btnThematicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThematicActionPerformed
+        // TODO add your handling code here:
+        openChuyenDe();
+    }//GEN-LAST:event_btnThematicActionPerformed
+
+    private void btnLearnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLearnerActionPerformed
+        // TODO add your handling code here:
+        openNguoiHoc();
+    }//GEN-LAST:event_btnLearnerActionPerformed
+
+    private void btnCourseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCourseActionPerformed
+        // TODO add your handling code here:
+        openKhoaHoc();
+    }//GEN-LAST:event_btnCourseActionPerformed
+
+    private void btnStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStudentActionPerformed
+        // TODO add your handling code here:
+        openHocVien();
+    }//GEN-LAST:event_btnStudentActionPerformed
+
+    private void btnInstructActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInstructActionPerformed
+        // TODO add your handling code here:
+        openHuongDan();
+    }//GEN-LAST:event_btnInstructActionPerformed
 
     /**
      * @param args the command line arguments
@@ -584,8 +654,8 @@ public class EduSysFrame extends javax.swing.JFrame {
     private void init() {
         setLocationRelativeTo(null);
         this.setIconImage(XImage.getAppIcon());
-//        new ChaoJDialog(this, true).setVisible(true);
-//        new Login(this, true).setVisible(true);
+        new ChaoJDialog(this, true).setVisible(true);
+        new Login(this, true).setVisible(true);
         startDongHo();
         
     }
@@ -617,6 +687,7 @@ public class EduSysFrame extends javax.swing.JFrame {
     // Hàm  đăng xuất - chức năng đăng xuất
     private void dangXuat() {
         Auth.clear();
+        this.dispose();
         new Login(this, true).setVisible(true);
     }
 

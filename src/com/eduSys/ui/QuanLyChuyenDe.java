@@ -4,6 +4,13 @@
  */
 package com.eduSys.ui;
 
+import com.eduSys.dao.ChuyenDeDAO;
+import com.eduSys.entity.NhanVien;
+import com.eduSys.poly.utils.MsgBox;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import com.eduSys.entity.ChuyenDe;
+
 /**
  *
  * @author LENOVO T560
@@ -15,6 +22,7 @@ public class QuanLyChuyenDe extends javax.swing.JFrame {
      */
     public QuanLyChuyenDe() {
         initComponents();
+        init();
     }
 
     /**
@@ -101,33 +109,78 @@ public class QuanLyChuyenDe extends javax.swing.JFrame {
         jScrollPane2.setViewportView(txtMoTa);
 
         btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
         jPanel3.add(btnThem);
 
         btnSua.setText("Sửa");
         btnSua.setSelected(true);
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
         jPanel3.add(btnSua);
 
         btnXoa.setText("Xóa");
+        btnXoa.setFocusCycleRoot(true);
+        btnXoa.setFocusTraversalPolicyProvider(true);
+        btnXoa.setHideActionText(true);
+        btnXoa.setInheritsPopupMenu(true);
+        btnXoa.setOpaque(true);
         btnXoa.setSelected(true);
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
         jPanel3.add(btnXoa);
 
         btnMoi.setText("Mới");
+        btnMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoiActionPerformed(evt);
+            }
+        });
         jPanel3.add(btnMoi);
 
         btnFirst.setText("|<");
         btnFirst.setSelected(true);
+        btnFirst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFirstActionPerformed(evt);
+            }
+        });
         jPanel4.add(btnFirst);
 
         btnPrev.setText("<<");
         btnPrev.setSelected(true);
+        btnPrev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrevActionPerformed(evt);
+            }
+        });
         jPanel4.add(btnPrev);
 
         btnNext.setText(">>");
         btnNext.setSelected(true);
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
         jPanel4.add(btnNext);
 
         btnLast.setText(">|");
         btnLast.setSelected(true);
+        btnLast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLastActionPerformed(evt);
+            }
+        });
         jPanel4.add(btnLast);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -158,10 +211,9 @@ public class QuanLyChuyenDe extends javax.swing.JFrame {
                                     .addComponent(txtHocPhi)
                                     .addComponent(txtMaCD)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(10, 10, 10))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -189,12 +241,13 @@ public class QuanLyChuyenDe extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtHocPhi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(27, 27, 27)
-                .addComponent(jLabel8)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -248,6 +301,46 @@ public class QuanLyChuyenDe extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+//        insert();
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+//        update();
+    }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+//        delete();/
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
+        // TODO add your handling code here:
+//        clearForm();
+    }//GEN-LAST:event_btnMoiActionPerformed
+
+    private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
+        // TODO add your handling code here:
+//        first();
+    }//GEN-LAST:event_btnFirstActionPerformed
+
+    private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
+        // TODO add your handling code here:
+//        prev();
+    }//GEN-LAST:event_btnPrevActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        // TODO add your handling code here:
+//        next();
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
+        // TODO add your handling code here:
+//        last();
+    }//GEN-LAST:event_btnLastActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,4 +414,32 @@ public class QuanLyChuyenDe extends javax.swing.JFrame {
     private javax.swing.JTextField txtTenCD;
     private javax.swing.JTextField txtThoiLuong;
     // End of variables declaration//GEN-END:variables
+
+    ChuyenDeDAO cdDAO = new ChuyenDeDAO();
+    int row = -1;
+
+    void init() {
+        setLocationRelativeTo(null);
+        this.loadTable();
+        this.row = -1;
+    }
+
+    // Chức năng loadTable đổ dữ liệu lên bảng Nhân Viên
+    private void loadTable() {
+        DefaultTableModel model = (DefaultTableModel) tblChuyenDe.getModel();
+        model.setRowCount(0);
+        try {
+            ArrayList<ChuyenDe> list = (ArrayList<ChuyenDe>) cdDAO.selectALL();
+            for (ChuyenDe cd : list) {
+                model.addRow(new Object[]{cd.getMaCD(), cd.getTenCD(), cd.getHocPhi(), cd.getThoiLuong(), cd.getHinhLogo(), cd.getMoTaChuyenDe()});
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+            e.printStackTrace();
+//            return;
+        }
+        
+        
+    }
+
 }

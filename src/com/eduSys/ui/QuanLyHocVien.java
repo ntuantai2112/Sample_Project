@@ -4,17 +4,25 @@
  */
 package com.eduSys.ui;
 
+import com.eduSys.dao.HocVienDAO;
+import com.eduSys.dao.NguoiHocDAO;
+import com.eduSys.entity.HocVien;
+import com.eduSys.entity.NguoiHoc;
+import com.eduSys.entity.NhanVien;
+import com.eduSys.poly.utils.MsgBox;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author LENOVO T560
  */
 public class QuanLyHocVien extends javax.swing.JFrame {
 
-    /**
-     * Creates new form QuanLyHocVien
-     */
     public QuanLyHocVien() {
+
         initComponents();
+        init();
     }
 
     /**
@@ -259,13 +267,13 @@ public class QuanLyHocVien extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(QuanLyHocVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuanLyNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(QuanLyHocVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuanLyNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(QuanLyHocVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuanLyNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(QuanLyHocVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(QuanLyNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -276,6 +284,7 @@ public class QuanLyHocVien extends javax.swing.JFrame {
             }
         });
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSuaDiem;
@@ -298,4 +307,51 @@ public class QuanLyHocVien extends javax.swing.JFrame {
     private javax.swing.JButton tbnXoaHV;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
+
+    HocVienDAO hvDAO = new HocVienDAO();
+    NguoiHocDAO nhDAO = new NguoiHocDAO();
+    int row = -1;
+
+    //Hàm khởi chạy chương trình
+    void init() {
+        setLocationRelativeTo(null);
+        this.loadTableHocVien();
+        this.loadTableNguoiHoc();
+        this.row = -1;
+//        this.updateStatus();
+    }
+
+    // Chức năng loadTable đổ dữ liệu lên bảng Nhân Viên
+    private void loadTableHocVien() {
+        DefaultTableModel model = (DefaultTableModel) tblHocVien.getModel();
+        model.setRowCount(0);
+        try {
+            ArrayList<HocVien> list = (ArrayList<HocVien>) hvDAO.selectALL();
+            int count = 1;
+            for (HocVien nh : list) {
+                model.addRow(new Object[]{count++, nh.getMaHV(), nh.getMaNH(), null, nh.getDiem()});
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+            e.printStackTrace();
+
+        }
+    }
+
+    // Chức năng loadTable đổ dữ liệu lên bảng Nhân Viên
+    private void loadTableNguoiHoc() {
+        DefaultTableModel model = (DefaultTableModel) tblHocVien.getModel();
+        model.setRowCount(0);
+        try {
+            ArrayList<NguoiHoc> list = (ArrayList<NguoiHoc>) nhDAO.selectALL();
+            for (NguoiHoc nh : list) {
+                model.addRow(new Object[]{nh.getMaNV(), nh.getHoTen(), nh.isGioiTinh() ? "Nam" : "Nữ", nh.getNgaySinh(), nh.getSoDT(), nh.getEmail(),});
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+            e.printStackTrace();
+
+        }
+    }
+
 }
