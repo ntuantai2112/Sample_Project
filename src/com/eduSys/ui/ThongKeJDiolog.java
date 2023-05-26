@@ -4,6 +4,13 @@
  */
 package com.eduSys.ui;
 
+import com.eduSys.dao.KhoaHocDAO;
+import com.eduSys.entity.ChuyenDe;
+import com.eduSys.entity.KhoaHoc;
+import com.eduSys.poly.utils.MsgBox;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author LENOVO T560
@@ -53,8 +60,6 @@ public class ThongKeJDiolog extends javax.swing.JFrame {
         jLabel2.setText("Tổng Kết Thống Kê");
 
         jLabel3.setText("Khóa Học :");
-
-        cboKhoaHoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         tblBangDiem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -269,10 +274,6 @@ public class ThongKeJDiolog extends javax.swing.JFrame {
         });
     }
 
-    // Hàm selectTab()
-    public void selectTab(int index) {
-        tabs.setSelectedIndex(index);
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cboKhoaHoc;
@@ -295,4 +296,31 @@ public class ThongKeJDiolog extends javax.swing.JFrame {
     private javax.swing.JTable tblDoanhThu;
     private javax.swing.JTable tblNguoiHoc;
     // End of variables declaration//GEN-END:variables
+
+    KhoaHocDAO khDAO = new KhoaHocDAO();
+
+    int row = -1;
+
+    // Hàm selectTab()
+    public void selectTab(int index) {
+        tabs.setSelectedIndex(index);
+    }
+
+    //Hàm khởi chạy chương trình
+    void init() {
+        setLocationRelativeTo(null);
+//        this.loadTableKhoaHoc();
+        this.row = -1;
+    }
+
+    // Chức năng set dữ liệu vào Combobox Chuyên Đề
+    private void setDataComboBoxKhoaHoc() {
+        ArrayList<KhoaHoc> listKhoaHoc = (ArrayList<KhoaHoc>) khDAO.selectALL();
+        for (KhoaHoc kh : listKhoaHoc) {
+            String item = kh.getGhiChu();
+            cboKhoaHoc.addItem(item);
+        }
+
+    }
+
 }

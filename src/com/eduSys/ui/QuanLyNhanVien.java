@@ -296,7 +296,10 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
     // Chức năng load lại dữ liệu lên Form
     private void tblNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNhanVienMouseClicked
         // TODO add your handling code here:
-//        setForm(Auth.user);
+        if (evt.getClickCount() == 1) {
+            this.row = tblNhanVien.getSelectedRow();
+            this.edit();
+        }
     }//GEN-LAST:event_tblNhanVienMouseClicked
     // Nút chức năng cập nhật sinh viên
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
@@ -424,10 +427,12 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             MsgBox.alert(this, "Xác nhận mật khẩu không đúng!");
         } else {
             try {
-                nvDAO.insert(nv);
-                MsgBox.alert(this, "Thêm mới nhân viên thành công");
-                loadTable();
-                clearForm();
+                if (validateForm()) {
+                    nvDAO.insert(nv);
+                    MsgBox.alert(this, "Thêm mới nhân viên thành công");
+                    loadTable();
+                    clearForm();
+                }
             } catch (Exception e) {
                 MsgBox.alert(this, "Thêm mới nhân viên thất bại");
             }
@@ -484,14 +489,16 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
 
     // tblNhanVien doble Click 
     private void edit() {
+
         String maNV = (String) tblNhanVien.getValueAt(this.row, 0);
         NhanVien nv = nvDAO.sellectById(maNV);
         this.setForm(nv);
-        tabs.setSelectedIndex(0);
+        tabs.setSelectedIndex(1);
         this.updateStatus();
     }
 
     private void first() {
+
         this.row = 0;
         this.edit();
     }
@@ -539,7 +546,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
         } catch (Exception e) {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
             e.printStackTrace();
-         
+
         }
     }
 
@@ -554,6 +561,42 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
     }
 
     private void updateStatus() {
+        boolean edit = (this.row >= 0);
+        boolean first = (this.row == 0);
+        boolean last = (this.row == tblNhanVien.getRowCount() - 1);
+
+        // Trạng thái form
+        txtMaNV.setEditable(!edit);
+        btnThem.setEnabled(!edit);
+        btnSua.setEnabled(edit);
+        btnXoa.setEnabled(edit);
+
+        // Trạng thái điều hướng
+        btnFirst.setEnabled(edit && !first);
+        btnPrev.setEnabled(edit && !first);
+        btnNext.setEnabled(edit && !last);
+        btnLast.setEnabled(edit && !last);
 
     }
+
+    private boolean validateForm() {
+        if (txtMaNV.getText().trim().equals("")) {
+            MsgBox.alert(this, "Vui lòng nhập vào mã nhân viên");
+            return false;
+        }
+        if (new String(txtPassword.getPassword()).trim().equals("")) {
+            MsgBox.alert(this, "Vui lòng nhập vào mật khẩu");
+            return false;
+        }
+        if (new String(txtXacThucMatKhau.getPassword()).trim().equals("")) {
+            MsgBox.alert(this, "Vui lòng nhập lại mật khẩu");
+            return false;
+        }
+        if (txtHoTen.getText().trim().equals("")) {
+            MsgBox.alert(this, "Vui lòng nhập vào họ tên nhân viên");
+            return false;
+        }
+        return true;
+    }
+
 }

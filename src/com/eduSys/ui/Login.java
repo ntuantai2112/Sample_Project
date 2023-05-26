@@ -118,7 +118,7 @@ public class Login extends javax.swing.JDialog {
         end();
 
     }//GEN-LAST:event_btnEndActionPerformed
-    
+
     // Nút chức năng đăng nhập
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
@@ -188,21 +188,23 @@ public class Login extends javax.swing.JDialog {
 
     //Chức năng đặng nhập
     private void login() {
-        String maNV = txtUser_Name.getText();
-        String matKhau = new String(txtPassword.getPassword());
+        if (validateForm()) {
+            String maNV = txtUser_Name.getText();
+            String matKhau = new String(txtPassword.getPassword());
 
-        NhanVien nv = nvDAO.sellectById(maNV);
-        // Trườn hợp sao tên đăng hợp
-        if (nv == null) {
-            MsgBox.alert(this, "Sai tên đăng nhập!");
-            // Trường hợp sai mật khẩu
-        } else if (!matKhau.equalsIgnoreCase(nv.getMatKhau())) {
-            MsgBox.alert(this, "Sai mặt khẩu đăng nhập!");
-            // Trường hợp k đúng tài khoản, lưu vào biến user
-        } else {
-            Auth.user = nv;
-            this.dispose();
-           
+            NhanVien nv = nvDAO.sellectById(maNV);
+            // Trườn hợp sao tên đăng hợp
+            if (nv == null) {
+                MsgBox.alert(this, "Sai tên đăng nhập!");
+                // Trường hợp sai mật khẩu
+            } else if (!matKhau.equalsIgnoreCase(nv.getMatKhau())) {
+                MsgBox.alert(this, "Sai mặt khẩu đăng nhập!");
+                // Trường hợp k đúng tài khoản, lưu vào biến user
+            } else {
+                Auth.user = nv;
+                this.dispose();
+
+            }
         }
 
     }
@@ -212,5 +214,17 @@ public class Login extends javax.swing.JDialog {
         if (MsgBox.confirm(this, "Bạn có chắc chắn muốn hủy bỏ")) {
             System.exit(0);
         }
+    }
+
+    private boolean validateForm() {
+        if (txtUser_Name.getText().trim().equals("")) {
+            MsgBox.alert(this, "Vui lòng nhập vào UserName");
+            return false;
+        }
+        if (new String(txtPassword.getPassword()).trim().equals("")) {
+            MsgBox.alert(this, "Vui lòng nhập vào UserName");
+            return false;
+        }
+        return true;
     }
 }

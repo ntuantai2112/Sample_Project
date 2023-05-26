@@ -4,6 +4,12 @@
  */
 package com.eduSys.ui;
 
+import com.eduSys.dao.NguoiHocDAO;
+import com.eduSys.entity.NguoiHoc;
+import com.eduSys.poly.utils.MsgBox;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author LENOVO T560
@@ -16,6 +22,7 @@ public class QuanLyNguoiHoc extends javax.swing.JDialog {
     public QuanLyNguoiHoc(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        init();
     }
 
     /**
@@ -383,4 +390,30 @@ public class QuanLyNguoiHoc extends javax.swing.JDialog {
     private javax.swing.JTextField txtNguoiHoc;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
+
+    NguoiHocDAO nhDAO = new NguoiHocDAO();
+    int row = -1;
+
+    //Hàm khởi chạy chương trình
+    void init() {
+        setLocationRelativeTo(null);
+        this.loadTableNguoiHoc();
+        this.row = -1;
+    }
+
+    // Chức năng loadTable đổ dữ liệu lên bảng Nhân Viên
+    private void loadTableNguoiHoc() {
+        DefaultTableModel model = (DefaultTableModel) tblQuanLyNguoiHoc.getModel();
+        model.setRowCount(0);
+        try {
+            ArrayList<NguoiHoc> list = (ArrayList<NguoiHoc>) nhDAO.selectALL();
+            for (NguoiHoc nh : list) {
+                model.addRow(new Object[]{nh.getMaNV(), nh.getHoTen(), nh.isGioiTinh() ? "Nam" : "Nữ", nh.getNgaySinh(), nh.getSoDT(), nh.getEmail(), nh.getMaNV(), nh.getNgayDk()});
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+            e.printStackTrace();
+
+        }
+    }
 }

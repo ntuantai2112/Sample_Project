@@ -21,7 +21,7 @@ public class KhoaHocDAO extends EduSysDAO<KhoaHoc, Integer> {
     String INSERT_SQL = "INSERT INTO KHOAHOC(MaKH,MACD,HOCPHI,THOILUONG,NGAYKG,GHICHU,MANV,NGAYTAO) VALUES (?,?,?,?,?,?,?,?)";
     String UPDATE_SQL = "UPDATE KHOAHOC SET HOCPHI = ?, THOILUONG = ?, NGAYKG = ?,GHICHU = ?,MANV = ?,NGAYTAO = ? , MACD = ? WHERE MaKH = ?";
     String DELETE_SQL = "DELETE FROM KHOAHOC WHERE MACD = ?  ";
-    String SELECT_ALL = "SELECT * FROM KHOAHOC";
+    String SELECT_ALL = "SELECT MAKH,THOILUONG,HOCPHI,NGAYKG,MANV,NGAYTAO FROM KHOAHOC";
     String SELECT_BY_ID_SQL = "SELECT * FROM KHOAHOC WHERE MACD = ?";
 
     @Override
@@ -75,11 +75,9 @@ public class KhoaHocDAO extends EduSysDAO<KhoaHoc, Integer> {
             while (rs.next()) {
                 KhoaHoc kh = new KhoaHoc();
                 kh.setMaKH(rs.getInt("MaKH"));
-                kh.setMaCD(rs.getString("MaCD"));
+                kh.setThoiLuong(rs.getInt("THOILUONG"));
                 kh.setHocPhi(rs.getInt("HocPhi"));
-                kh.setThoiLuong(rs.getInt("ThoiLuong"));
                 kh.setNgayKG(rs.getDate("NgayKG"));
-                kh.setGhiChu(rs.getString("GhiChu"));
                 kh.setMaNV(rs.getString("MaNV"));
                 kh.setNgayTao(rs.getDate("NgayTao"));
 

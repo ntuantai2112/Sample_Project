@@ -362,6 +362,11 @@ public class EduSysFrame extends javax.swing.JFrame {
 
         mniTranscrip.setText("Thống Kê");
         mniTranscrip.setMargin(new java.awt.Insets(5, 20, 5, 20));
+        mniTranscrip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniTranscripActionPerformed(evt);
+            }
+        });
 
         mni_Transcript.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
         mni_Transcript.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/eduSys/File_Hinh_Anh/transcript.png"))); // NOI18N
@@ -502,7 +507,7 @@ public class EduSysFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_mniEmployeeActionPerformed
 
     private void mni_TranscriptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_TranscriptActionPerformed
-        new ThongKeJDiolog().selectTab(0);
+        new ThongKeJDiolog().setVisible(true);
     }//GEN-LAST:event_mni_TranscriptActionPerformed
 
     private void mniNumber_LearnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniNumber_LearnerActionPerformed
@@ -559,6 +564,11 @@ public class EduSysFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         openHuongDan();
     }//GEN-LAST:event_btnInstructActionPerformed
+
+    private void mniTranscripActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniTranscripActionPerformed
+        // TODO add your handling code here:
+//        openThongKe(WIDTH)ThongKe();
+    }//GEN-LAST:event_mniTranscripActionPerformed
 
     /**
      * @param args the command line arguments

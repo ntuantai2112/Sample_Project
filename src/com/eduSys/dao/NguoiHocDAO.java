@@ -17,13 +17,13 @@ import java.util.List;
  * @author LENOVO T560
  */
 public class NguoiHocDAO extends EduSysDAO<NguoiHoc, String> {
-
+    
     String INSERT_SQL = "INSERT INTO NGUOIHOC(MANH,HOTEN,NGAYSINH,GIOITINH,SDT,EMAIL,GHICHU,MANV,NGAYDK)VALUES(?,?,?,?,?,?,?,?,?)";
     String UPDATE_SQL = "UPDATE NGUOIHOC SET HOTEN = ?, NGAYSINH = ?, GIOITINH = ?,SDT = ?,EMAIL = ?,GHICHU = ?,MANV = ?,NGAYDK = ? WHERE MANH = ?";
     String DELETE_SQL = "DELETE FROM NGUOIHOC WHERE MANH = ?  ";
-    String SELECT_ALL = "SELECT * FROM NGUOIHOC";
-    String SELECT_BY_ID_SQL = "SELECT * FROM NGUOIHOC WHERE MANH = ?";
-
+    String SELECT_ALL = "SELECT MANH,HOTEN,NGAYSINH,GIOITINH,SDT,EMAIL,GHICHU,MANV,NGAYDK FROM NGUOIHOC";
+    String SELECT_BY_ID_SQL = "SELECT HOTEN,NGAYSINH,GIOITINH,SDT,EMAIL,GHICHU,MANV,NGAYDK FROM NGUOIHOC FROM NGUOIHOC WHERE MANH = ?";
+    
     @Override
     public void insert(NguoiHoc nh) {
         try {
@@ -42,7 +42,7 @@ public class NguoiHocDAO extends EduSysDAO<NguoiHoc, String> {
             ex.printStackTrace();
         }
     }
-
+    
     @Override
     public void delete(String id) {
         try {
@@ -51,12 +51,12 @@ public class NguoiHocDAO extends EduSysDAO<NguoiHoc, String> {
             ex.printStackTrace();
         }
     }
-
+    
     @Override
     public List<NguoiHoc> selectALL() {
         return this.selectBySQL(SELECT_ALL);
     }
-
+    
     @Override
     public NguoiHoc sellectById(String id) {
         List<NguoiHoc> list = this.selectBySQL(SELECT_BY_ID_SQL, id);
@@ -76,21 +76,22 @@ public class NguoiHocDAO extends EduSysDAO<NguoiHoc, String> {
                 NguoiHoc nh = new NguoiHoc();
                 nh.setMaNH(rs.getString("MaNH"));
                 nh.setHoTen(rs.getString("HoTen"));
-                nh.setGioiTinh(true);
-                nh.setSoDT(rs.getString("SODT"));
+                nh.setNgaySinh(rs.getDate("NgaySinh"));
+                nh.setGioiTinh(rs.getBoolean("GIOITINH"));
+                nh.setSoDT(rs.getString("SDT"));
                 nh.setEmail(rs.getString("Email"));
                 nh.setGhiChu(rs.getString("GhiChu"));
                 nh.setMaNV(rs.getString("MaNV"));
                 nh.setNgayDk(rs.getDate("NgayDK"));
-
+                
                 listNH.add(nh);
             }
             rs.getStatement().getConnection().close();
             return listNH;
         } catch (Exception e) {
             throw new RuntimeException(e);
-
+            
         }
     }
-
+    
 }

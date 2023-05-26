@@ -16,12 +16,12 @@ import java.util.List;
  *
  * @author LENOVO T560
  */
-public class HocVienDAO extends EduSysDAO<HocVien, Integer> {
+public class HocVienDAO extends EduSysDAO<HocVien, String> {
 
     String INSERT_SQL = "INSERT INTO HOCVIEN(MAHV,MAKH,MANH,DIEM) VALUES(?,?,?,?)";
     String UPDATE_SQL = "UPDATE HOCVIEN SET MAKH = ?, MANH = ?, DIEM = ? WHERE MAHV = ?";
     String DELETE_SQL = "DELETE FROM HOCVIEN WHERE MAHV = ?  ";
-    String SELECT_ALL = "SELECT * FROM HOCVIEN";
+    String SELECT_ALL = "SELECT MaHV,MaKH,MaNH,Diem FROM HOCVIEN";
     String SELECT_BY_ID_SQL = "SELECT * FROM HOCVIEN WHERE MAHV = ?";
 
     @Override
@@ -44,7 +44,7 @@ public class HocVienDAO extends EduSysDAO<HocVien, Integer> {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(String id) {
         try {
             JdbcHalper.update(DELETE_SQL, id);
         } catch (SQLException ex) {
@@ -58,7 +58,7 @@ public class HocVienDAO extends EduSysDAO<HocVien, Integer> {
     }
 
     @Override
-    public HocVien sellectById(Integer id) {
+    public HocVien sellectById(String id) {
         List<HocVien> list = this.selectBySQL(SELECT_BY_ID_SQL, id);
         if (list.isEmpty()) {
             return null;
@@ -75,8 +75,8 @@ public class HocVienDAO extends EduSysDAO<HocVien, Integer> {
             while (rs.next()) {
                 HocVien hv = new HocVien();
                 hv.setMaHV(rs.getInt("MaHV"));
-                hv.setMaKH(rs.getInt("TenCD"));
-                hv.setMaNH(rs.getString("HocPhi"));
+                hv.setMaKH(rs.getInt("MaKH"));
+                hv.setMaNH(rs.getString("MaNH"));
                 hv.setDiem(rs.getFloat("Diem"));
 
                 listHV.add(hv);
@@ -88,7 +88,5 @@ public class HocVienDAO extends EduSysDAO<HocVien, Integer> {
 
         }
     }
-    
-    
 
 }

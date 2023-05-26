@@ -4,6 +4,13 @@
  */
 package com.eduSys.ui;
 
+import com.eduSys.dao.KhoaHocDAO;
+import com.eduSys.dao.NguoiHocDAO;
+import com.eduSys.entity.KhoaHoc;
+import com.eduSys.poly.utils.MsgBox;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author LENOVO T560
@@ -15,6 +22,7 @@ public class QuanLyKhoaHoc extends javax.swing.JFrame {
      */
     public QuanLyKhoaHoc() {
         initComponents();
+        init();
     }
 
     /**
@@ -224,13 +232,12 @@ public class QuanLyKhoaHoc extends javax.swing.JFrame {
                     .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -268,7 +275,7 @@ public class QuanLyKhoaHoc extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 431, Short.MAX_VALUE)
+                .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -345,4 +352,31 @@ public class QuanLyKhoaHoc extends javax.swing.JFrame {
     private javax.swing.JTextField txtTenCD;
     private javax.swing.JTextField txtThoiLuong;
     // End of variables declaration//GEN-END:variables
+
+    KhoaHocDAO khDAO = new KhoaHocDAO();
+    int row = -1;
+
+    //Hàm khởi chạy chương trình
+    void init() {
+        setLocationRelativeTo(null);
+        this.loadTableKhoaHoc();
+        this.row = -1;
+    }
+
+    // Chức năng loadTable đổ dữ liệu lên bảng Nhân Viên
+    private void loadTableKhoaHoc() {
+        DefaultTableModel model = (DefaultTableModel) tblKhoaHoc.getModel();
+        model.setRowCount(0);
+        try {
+            ArrayList<KhoaHoc> list = (ArrayList<KhoaHoc>) khDAO.selectALL();
+            int count = 1;
+            for (KhoaHoc kh : list) {
+                model.addRow(new Object[]{kh.getMaKH(),kh.getThoiLuong(),kh.getHocPhi(),kh.getNgayKG(),kh.getMaNV(),kh.getNgayTao()});
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+            e.printStackTrace();
+
+        }
+    }
 }
