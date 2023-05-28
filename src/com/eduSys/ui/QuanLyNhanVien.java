@@ -543,6 +543,7 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
             for (NhanVien nv : list) {
                 model.addRow(new Object[]{nv.getMaNV(), nv.getMatKhau(), nv.getHoTen(), nv.isVaiTro() ? "Trưởng phòng" : "Nhân Viên"});
             }
+            tabs.setSelectedIndex(0);
         } catch (Exception e) {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
             e.printStackTrace();

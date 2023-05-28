@@ -507,7 +507,7 @@ public class EduSysFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_mniEmployeeActionPerformed
 
     private void mni_TranscriptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_TranscriptActionPerformed
-        new ThongKeJDiolog().setVisible(true);
+        new ThongKeJDiolog().selectTab(0);
     }//GEN-LAST:event_mni_TranscriptActionPerformed
 
     private void mniNumber_LearnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniNumber_LearnerActionPerformed

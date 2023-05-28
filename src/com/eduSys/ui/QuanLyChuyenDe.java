@@ -10,6 +10,11 @@ import com.eduSys.poly.utils.MsgBox;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import com.eduSys.entity.ChuyenDe;
+import com.eduSys.poly.utils.Auth;
+import com.edusys.poly.utils.XImage;
+import java.io.File;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -69,6 +74,8 @@ public class QuanLyChuyenDe extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblChuyenDe = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        fileChooser = new javax.swing.JFileChooser();
 
         jButton6.setText("jButton6");
 
@@ -265,6 +272,11 @@ public class QuanLyChuyenDe extends javax.swing.JFrame {
                 "Mã CD", "Tên CD", "Học Phí", "Thời Lượng", "Hình", "Mô tả"
             }
         ));
+        tblChuyenDe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblChuyenDeMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblChuyenDe);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -279,6 +291,25 @@ public class QuanLyChuyenDe extends javax.swing.JFrame {
         );
 
         tabs.addTab("Danh sách", jPanel2);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(fileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(105, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(fileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(86, Short.MAX_VALUE))
+        );
+
+        tabs.addTab("Chọn logo chuyên đề", jPanel5);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -304,43 +335,51 @@ public class QuanLyChuyenDe extends javax.swing.JFrame {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-//        insert();
+        insert();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
-//        update();
+        update();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
-//        delete();/
+        delete();
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
         // TODO add your handling code here:
-//        clearForm();
+        clearForm();
     }//GEN-LAST:event_btnMoiActionPerformed
 
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
         // TODO add your handling code here:
-//        first();
+        first();
     }//GEN-LAST:event_btnFirstActionPerformed
 
     private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
         // TODO add your handling code here:
-//        prev();
+        prev();
     }//GEN-LAST:event_btnPrevActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         // TODO add your handling code here:
-//        next();
+        next();
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
         // TODO add your handling code here:
-//        last();
+        last();
     }//GEN-LAST:event_btnLastActionPerformed
+
+    private void tblChuyenDeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChuyenDeMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 1) {
+            this.row = tblChuyenDe.getSelectedRow();
+            this.edit();
+        }
+    }//GEN-LAST:event_tblChuyenDeMouseClicked
 
     /**
      * @param args the command line arguments
@@ -386,6 +425,7 @@ public class QuanLyChuyenDe extends javax.swing.JFrame {
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;
+    private javax.swing.JFileChooser fileChooser;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -403,6 +443,7 @@ public class QuanLyChuyenDe extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblAnh;
@@ -422,6 +463,7 @@ public class QuanLyChuyenDe extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         this.loadTable();
         this.row = -1;
+        updateStatus();
     }
 
     // Chức năng loadTable đổ dữ liệu lên bảng Nhân Viên
@@ -433,13 +475,198 @@ public class QuanLyChuyenDe extends javax.swing.JFrame {
             for (ChuyenDe cd : list) {
                 model.addRow(new Object[]{cd.getMaCD(), cd.getTenCD(), cd.getHocPhi(), cd.getThoiLuong(), cd.getHinhLogo(), cd.getMoTaChuyenDe()});
             }
+            tabs.setSelectedIndex(1);
         } catch (Exception e) {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
             e.printStackTrace();
-//            return;
+            return;
         }
-        
-        
+
+    }
+
+    // Chức năng thêm mới chuyên đề
+    void insert() {
+
+        ChuyenDe cd = getData();
+//        String paswordAuthentication = new String(txtXacThucMatKhau.getPassword());
+//        if (!paswordAuthentication.equals(cd.getMatKhau())) {
+//            MsgBox.alert(this, "Xác nhận mật khẩu không đúng!");
+//        } else {
+//            
+//        }
+
+        try {
+            if (validateForm()) {
+                cdDAO.insert(cd);
+                MsgBox.alert(this, "Thêm mới nhân viên thành công");
+                loadTable();
+                clearForm();
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Thêm mới nhân viên thất bại");
+        }
+
+    }
+
+    // Hàm xóa nhân viên
+    void delete() {
+        if (!Auth.isManager()) {
+            MsgBox.alert(this, "Bạn không có quyền xóa chuyên đề này");
+        } else {
+            String maNV = txtMaCD.getText();
+            if (maNV.equals(Auth.user.getMaNV())) {
+                MsgBox.alert(this, "Bạn không được xóa chính bạn!");
+            } else if (MsgBox.confirm(this, "Bạn chắc chắn muốn xóa chuyên đề này ?")) {
+                try {
+                    cdDAO.delete(maNV);
+                    MsgBox.alert(this, "Xóa chuyên đề thành công!");
+                    loadTable();
+                    clearForm();
+
+                } catch (Exception e) {
+                    MsgBox.alert(this, "Xóa chuyên đề thất bại");
+                }
+            }
+        }
+    }
+
+    // Hàm cập nhật chuyên đề
+    void update() {
+        ChuyenDe cd = getData();
+//        String paswordAuthentication = new String(txtXacThucMatKhau.getPassword());
+//        if (!paswordAuthentication.equals(cd.getMatKhau())) {
+//            MsgBox.alert(this, "Xác nhận mật khẩu không đúng!");
+//        } else {
+//
+//        }
+
+        try {
+            cdDAO.update(cd);
+            MsgBox.alert(this, "Cập nhật nhân viên thành công");
+            loadTable();
+            clearForm();
+        } catch (Exception e) {
+            MsgBox.alert(this, "Cập nhật nhân viên thất bại");
+        }
+    }
+
+    // Hàm chức năng làm mới form
+    private void clearForm() {
+        ChuyenDe cd = new ChuyenDe();
+        this.setForm(cd);
+        this.row = -1;
+        this.updateStatus();
+    }
+
+    // tblNhanVien doble Click 
+    private void edit() {
+
+        String maCD = (String) tblChuyenDe.getValueAt(this.row, 0);
+        ChuyenDe cd = cdDAO.sellectById(maCD);
+        this.setForm(cd);
+        tabs.setSelectedIndex(0);
+        this.updateStatus();
+    }
+
+    private void first() {
+
+        this.row = 0;
+        this.edit();
+    }
+
+    private void prev() {
+        if (this.row > 0) {
+            this.row--;
+            this.edit();
+        }
+    }
+
+    private void next() {
+        if (this.row < tblChuyenDe.getRowCount() - 1) {
+            this.row++;
+            this.edit();
+        }
+
+    }
+
+    private void last() {
+        row = tblChuyenDe.getRowCount() - 1;
+        this.edit();
+    }
+
+    // Hàm chức năng load dữ liệu lên Form
+    private void setForm(ChuyenDe cd) {
+        txtMaCD.setText(cd.getMaCD());
+        txtTenCD.setText(cd.getTenCD());
+        txtThoiLuong.setText(String.valueOf(cd.getThoiLuong()));
+        txtHocPhi.setText(String.valueOf(cd.getHocPhi()));
+        txtMoTa.setText(cd.getMoTaChuyenDe());
+//        lblAnh.set
+
+    }
+
+    // Lấy dữ liệu từ form
+    private ChuyenDe getData() {
+        ChuyenDe cd = new ChuyenDe();
+        cd.setMaCD(txtMaCD.getText());
+        cd.setTenCD(txtTenCD.getText());
+        cd.setThoiLuong(Integer.parseInt(txtThoiLuong.getText()));
+        cd.setHocPhi(Float.parseFloat(txtHocPhi.getText()));
+        cd.setMoTaChuyenDe(txtMoTa.getText());
+        return cd;
+    }
+
+    private boolean validateForm() {
+        if (txtMaCD.getText().trim().equals("")) {
+            MsgBox.alert(this, "Vui lòng nhập vào mã chuyên đề");
+        }
+        if (txtTenCD.getText().trim().equals("")) {
+            MsgBox.alert(this, "Vui lòng nhập tên chuyên đề");
+            return false;
+        }
+        if (txtThoiLuong.getText().trim().equals("")) {
+            MsgBox.alert(this, "Vui lòng nhập thời lượng");
+            return false;
+        }
+        if (txtHocPhi.getText().trim().equals("")) {
+            MsgBox.alert(this, "Vui lòng nhập vào học phí");
+            return false;
+        }
+        if (txtMaCD.getText().trim().equals("")) {
+            MsgBox.alert(this, "Vui lòng nhập vào mã chuyên đề");
+            return false;
+        }
+        return true;
+    }
+
+    private void updateStatus() {
+        boolean edit = (this.row >= 0);
+        boolean first = (this.row == 0);
+        boolean last = (this.row == tblChuyenDe.getRowCount() - 1);
+
+        // Trạng thái form
+        txtMaCD.setEditable(!edit);
+        btnThem.setEnabled(!edit);
+        btnSua.setEnabled(edit);
+        btnXoa.setEnabled(edit);
+
+        // Trạng thái điều hướng
+        btnFirst.setEnabled(edit && !first);
+        btnPrev.setEnabled(edit && !first);
+        btnNext.setEnabled(edit && !last);
+        btnLast.setEnabled(edit && !last);
+
+    }
+
+    private void chonAnh() {
+        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();// lấy file
+            XImage.save(file); // Lưu hình ảnh vào thư mục logos
+            ImageIcon icon = XImage.read(file.getName());// đọc hình từ logo
+            lblAnh.setIcon(icon);
+            lblAnh.setToolTipText(file.getName()); // giữ tên hình trong ToolTip
+
+        }
     }
 
 }
