@@ -4,6 +4,7 @@
  */
 package com.eduSys.dao;
 
+import com.eduSys.entity.ChuyenDe;
 import com.eduSys.entity.HocVien;
 import com.eduSys.entity.KhoaHoc;
 import com.eduSys.poly.utils.JdbcHalper;
@@ -89,6 +90,12 @@ public class KhoaHocDAO extends EduSysDAO<KhoaHoc, Integer> {
             throw new RuntimeException(e);
 
         }
+    }
+    
+     public List<KhoaHoc> selectByChuyenDe(String chuyenDe) {
+         ArrayList<KhoaHoc> listKH = new ArrayList<>();
+         return listKH;
+//        return this.selectBySQL(SELECT_ALL);
     }
 
 }

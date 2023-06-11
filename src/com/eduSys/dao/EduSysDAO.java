@@ -21,4 +21,5 @@ public abstract class EduSysDAO<Entity, Key> {
     abstract public Entity sellectById(Key key);
     abstract protected List<Entity> selectBySQL(String sql,Object...args);
     
+    
 }

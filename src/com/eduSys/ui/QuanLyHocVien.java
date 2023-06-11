@@ -345,7 +345,9 @@ public class QuanLyHocVien extends javax.swing.JFrame {
         this.loadTableNguoiHoc();
         this.setDataComboBoxChuyenDe();
         this.setDataComboBoxKhoaHoc();
-
+        
+       
+        
         this.row = -1;
     }
 

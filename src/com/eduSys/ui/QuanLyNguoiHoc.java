@@ -6,8 +6,13 @@ package com.eduSys.ui;
 
 import com.eduSys.dao.NguoiHocDAO;
 import com.eduSys.entity.NguoiHoc;
+import com.eduSys.entity.NhanVien;
+import com.eduSys.poly.utils.Auth;
 import com.eduSys.poly.utils.MsgBox;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -47,7 +52,7 @@ public class QuanLyNguoiHoc extends javax.swing.JDialog {
         btnTimKiem = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtNguoiHoc = new javax.swing.JTextField();
+        txtMaNguoiHoc = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtHoTen = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -100,10 +105,20 @@ public class QuanLyNguoiHoc extends javax.swing.JDialog {
         ));
         tblQuanLyNguoiHoc.setRowHeight(22);
         tblQuanLyNguoiHoc.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblQuanLyNguoiHoc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblQuanLyNguoiHocMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblQuanLyNguoiHoc);
 
         btnTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/eduSys/File_Hinh_Anh/search.png"))); // NOI18N
         btnTimKiem.setText("Tìm kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -161,39 +176,79 @@ public class QuanLyNguoiHoc extends javax.swing.JDialog {
         jScrollPane3.setViewportView(txtGhiChu);
 
         btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
         jPanel4.add(btnThem);
 
         btnSua.setText("Sửa");
         btnSua.setEnabled(false);
         btnSua.setSelected(true);
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
         jPanel4.add(btnSua);
 
         btnXoa.setText("Xóa");
         btnXoa.setEnabled(false);
         btnXoa.setSelected(true);
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
         jPanel4.add(btnXoa);
 
         btnMoi.setText("Mới");
+        btnMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoiActionPerformed(evt);
+            }
+        });
         jPanel4.add(btnMoi);
 
         btnFirst.setText("|<");
         btnFirst.setEnabled(false);
         btnFirst.setSelected(true);
+        btnFirst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFirstActionPerformed(evt);
+            }
+        });
         jPanel6.add(btnFirst);
 
         btnPrev.setText("<<");
         btnPrev.setEnabled(false);
         btnPrev.setSelected(true);
+        btnPrev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrevActionPerformed(evt);
+            }
+        });
         jPanel6.add(btnPrev);
 
         btnNext.setText(">>");
         btnNext.setEnabled(false);
         btnNext.setSelected(true);
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
         jPanel6.add(btnNext);
 
         btnLast.setText(">|");
         btnLast.setEnabled(false);
         btnLast.setSelected(true);
+        btnLast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLastActionPerformed(evt);
+            }
+        });
         jPanel6.add(btnLast);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -227,7 +282,7 @@ public class QuanLyNguoiHoc extends javax.swing.JDialog {
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(txtEmail)))
                             .addComponent(txtHoTen)
-                            .addComponent(txtNguoiHoc, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtMaNguoiHoc, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -244,7 +299,7 @@ public class QuanLyNguoiHoc extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(txtNguoiHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtMaNguoiHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
@@ -305,6 +360,59 @@ public class QuanLyNguoiHoc extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        // TODO add your handling code here:
+        timKiem();
+    }//GEN-LAST:event_btnTimKiemActionPerformed
+
+    private void tblQuanLyNguoiHocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblQuanLyNguoiHocMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 1) {
+            this.row = tblQuanLyNguoiHoc.getSelectedRow();
+            this.edit();
+        }
+    }//GEN-LAST:event_tblQuanLyNguoiHocMouseClicked
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+        insert();
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+        update();
+    }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+        delete();
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
+        // TODO add your handling code here:
+        clearForm();
+    }//GEN-LAST:event_btnMoiActionPerformed
+
+    private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
+        // TODO add your handling code here:
+        first();
+    }//GEN-LAST:event_btnFirstActionPerformed
+
+    private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
+        // TODO add your handling code here:
+        prev();
+    }//GEN-LAST:event_btnPrevActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        // TODO add your handling code here:
+        next();
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
+        // TODO add your handling code here:
+        last();
+    }//GEN-LAST:event_btnLastActionPerformed
 
     /**
      * @param args the command line arguments
@@ -386,8 +494,8 @@ public class QuanLyNguoiHoc extends javax.swing.JDialog {
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextArea txtGhiChu;
     private javax.swing.JTextField txtHoTen;
+    private javax.swing.JTextField txtMaNguoiHoc;
     private javax.swing.JTextField txtNgaySinh;
-    private javax.swing.JTextField txtNguoiHoc;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 
@@ -401,11 +509,129 @@ public class QuanLyNguoiHoc extends javax.swing.JDialog {
         this.row = -1;
     }
 
+    // Chức năng thêm mới nhân viên
+    void insert() {
+
+        NguoiHoc nh = getData();
+        try {
+            if (validateForm()) {
+                nhDAO.insert(nh);
+                MsgBox.alert(this, "Thêm mới nhân viên thành công");
+                loadTableNguoiHoc();
+                clearForm();
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Thêm mới nhân viên thất bại");
+        }
+
+    }
+
+    // Hàm xóa nhân viên
+    void delete() {
+        if (!Auth.isManager()) {
+            MsgBox.alert(this, "Bạn không có quyền xóa nhân viên");
+        } else {
+            String maNH = txtMaNguoiHoc.getText();
+            if (maNH.equals(Auth.user.getMaNV())) {
+                MsgBox.alert(this, "Bạn không được xóa chính bạn!");
+            } else if (MsgBox.confirm(this, "Bạn chắc chắn muốn xóa nhân viên này ?")) {
+                try {
+                    nhDAO.delete(maNH);
+                    MsgBox.alert(this, "Xóa nhân viên thành công!");
+                    loadTableNguoiHoc();
+                    clearForm();
+
+                } catch (Exception e) {
+                    MsgBox.alert(this, "Xóa nhân viên thất bại");
+                }
+            }
+        }
+    }
+
+    void update() {
+        NguoiHoc nh = getData();
+        try {
+            nhDAO.update(nh);
+            MsgBox.alert(this, "Cập nhật nhân viên thành công");
+            loadTableNguoiHoc();
+            clearForm();
+        } catch (Exception e) {
+            MsgBox.alert(this, "Cập nhật nhân viên thất bại");
+        }
+
+    }
+
+// Hàm chức năng làm mới form
+    private void clearForm() {
+        NguoiHoc nh = new NguoiHoc();
+        this.setForm(nh);
+        this.row = -1;
+        this.updateStatus();
+    }
+
+    // tblNhanVien doble Click 
+    private void edit() {
+
+        String maNV = (String) tblQuanLyNguoiHoc.getValueAt(this.row, 0);
+        NguoiHoc nh = nhDAO.sellectById(maNV);
+        this.setForm(nh);
+        tabs.setSelectedIndex(1);
+        this.updateStatus();
+    }
+
+    private void first() {
+
+        this.row = 0;
+        this.edit();
+    }
+
+    private void prev() {
+        if (this.row > 0) {
+            this.row--;
+            this.edit();
+        }
+    }
+
+    private void next() {
+        if (this.row < tblQuanLyNguoiHoc.getRowCount() - 1) {
+            this.row++;
+            this.edit();
+        }
+
+    }
+
+    private void last() {
+        row = tblQuanLyNguoiHoc.getRowCount() - 1;
+        this.edit();
+    }
+
+    // Hàm chức năng load dữ liệu lên Form
+    private void setForm(NguoiHoc nh) {
+        txtMaNguoiHoc.setText(nh.getMaNH());
+        txtHoTen.setText(nh.getHoTen());
+        if (nh.isGioiTinh()) {
+            rdoMale.setSelected(true);
+        } else {
+            rdoFemale.setSelected(true);
+        }
+        // Thiết lập ngày sinh
+        if (nh.getNgaySinh() != null) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            String ngaySinh = dateFormat.format(nh.getNgaySinh());
+            txtNgaySinh.setText(ngaySinh);
+        }
+        txtHoTen.setText(nh.getHoTen());
+        txtDienThoai.setText(nh.getSoDT());
+        txtEmail.setText(nh.getEmail());
+        txtGhiChu.setText(nh.getGhiChu());
+    }
     // Chức năng loadTable đổ dữ liệu lên bảng Nhân Viên
+
     private void loadTableNguoiHoc() {
         DefaultTableModel model = (DefaultTableModel) tblQuanLyNguoiHoc.getModel();
         model.setRowCount(0);
         try {
+            String keyWord = txtTimKiem.getText();
             ArrayList<NguoiHoc> list = (ArrayList<NguoiHoc>) nhDAO.selectALL();
             for (NguoiHoc nh : list) {
                 model.addRow(new Object[]{nh.getMaNV(), nh.getHoTen(), nh.isGioiTinh() ? "Nam" : "Nữ", nh.getNgaySinh(), nh.getSoDT(), nh.getEmail(), nh.getMaNV(), nh.getNgayDk()});
@@ -416,4 +642,103 @@ public class QuanLyNguoiHoc extends javax.swing.JDialog {
 
         }
     }
+
+    // Lấy dữ liệu từ form
+    private NguoiHoc getData() {
+        NguoiHoc nh = new NguoiHoc();
+        nh.setMaNH(txtMaNguoiHoc.getText());
+        nh.setHoTen(txtHoTen.getText());
+        if (rdoFemale.isSelected()) {
+            nh.setGioiTinh(false);
+        } else {
+            nh.setGioiTinh(true);
+        }
+//       // Thiết lập ngày sinh
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            Date ngaySinh = dateFormat.parse(txtNgaySinh.getText());
+            nh.setNgaySinh(ngaySinh);
+        } catch (ParseException e) {
+            // Xử lý khi ngày sinh không hợp lệ
+            e.printStackTrace();
+        }
+        nh.setSoDT(txtDienThoai.getText());
+        nh.setEmail(txtEmail.getText());
+        nh.setGhiChu(txtGhiChu.getText());
+        return nh;
+    }
+
+    private void updateStatus() {
+        boolean edit = (this.row >= 0);
+        boolean first = (this.row == 0);
+        boolean last = (this.row == tblQuanLyNguoiHoc.getRowCount() - 1);
+
+        // Trạng thái form
+        txtMaNguoiHoc.setEditable(!edit);
+        btnThem.setEnabled(!edit);
+        btnSua.setEnabled(edit);
+        btnXoa.setEnabled(edit);
+
+        // Trạng thái điều hướng
+        btnFirst.setEnabled(edit && !first);
+        btnPrev.setEnabled(edit && !first);
+        btnNext.setEnabled(edit && !last);
+        btnLast.setEnabled(edit && !last);
+
+    }
+
+    private boolean validateForm() {
+        if (txtMaNguoiHoc.getText().trim().equals("")) {
+            MsgBox.alert(this, "Vui lòng nhập vào mã người học");
+            return false;
+        }
+
+        if (txtHoTen.getText().trim().equals("")) {
+            MsgBox.alert(this, "Vui lòng nhập vào họ tên người học");
+            return false;
+        }
+
+        if (txtNgaySinh.getText().trim().equals("")) {
+            MsgBox.alert(this, "Vui lòng nhập vào ngày sinh");
+            return false;
+        }
+
+        if (txtDienThoai.getText().trim().equals("")) {
+            MsgBox.alert(this, "Vui lòng nhập vào điện thoại");
+            return false;
+        }
+        if (txtEmail.getText().trim().equals("")) {
+            MsgBox.alert(this, "Vui lòng nhập vào Email");
+            return false;
+        }
+        if (txtGhiChu.getText().trim().equals("")) {
+            MsgBox.alert(this, "Vui lòng nhập vào ghi chú");
+            return false;
+        }
+
+        return true;
+    }
+
+    private void fillToTable(String keyWord) {
+        DefaultTableModel model = (DefaultTableModel) tblQuanLyNguoiHoc.getModel();
+        model.setRowCount(0);
+        try {
+            ArrayList<NguoiHoc> list = (ArrayList<NguoiHoc>) nhDAO.selectByKeyWord(keyWord);
+            for (NguoiHoc nh : list) {
+                model.addRow(new Object[]{nh.getMaNV(), nh.getHoTen(), nh.isGioiTinh() ? "Nam" : "Nữ", nh.getNgaySinh(), nh.getSoDT(), nh.getEmail(), nh.getMaNV(), nh.getNgayDk()});
+            }
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+            e.printStackTrace();
+
+        }
+    }
+
+    private void timKiem() {
+        this.fillToTable(txtTimKiem.getText());
+        this.clearForm();
+        this.row = -1;
+        updateStatus();
+    }
+
 }

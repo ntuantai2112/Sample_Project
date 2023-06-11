@@ -100,6 +100,11 @@ public class QuanLyChuyenDe extends javax.swing.JFrame {
 
         lblAnh.setForeground(new java.awt.Color(255, 51, 0));
         lblAnh.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 0, 255)));
+        lblAnh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblAnhMouseClicked(evt);
+            }
+        });
 
         jLabel4.setText("Mã chuyên đề");
 
@@ -297,19 +302,19 @@ public class QuanLyChuyenDe extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addContainerGap()
                 .addComponent(fileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(24, 24, 24)
                 .addComponent(fileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
-        tabs.addTab("Chọn logo chuyên đề", jPanel5);
+        tabs.addTab("Chọn ảnh logo", jPanel5);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -333,46 +338,6 @@ public class QuanLyChuyenDe extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-        // TODO add your handling code here:
-        insert();
-    }//GEN-LAST:event_btnThemActionPerformed
-
-    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        // TODO add your handling code here:
-        update();
-    }//GEN-LAST:event_btnSuaActionPerformed
-
-    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        // TODO add your handling code here:
-        delete();
-    }//GEN-LAST:event_btnXoaActionPerformed
-
-    private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
-        // TODO add your handling code here:
-        clearForm();
-    }//GEN-LAST:event_btnMoiActionPerformed
-
-    private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
-        // TODO add your handling code here:
-        first();
-    }//GEN-LAST:event_btnFirstActionPerformed
-
-    private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
-        // TODO add your handling code here:
-        prev();
-    }//GEN-LAST:event_btnPrevActionPerformed
-
-    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        // TODO add your handling code here:
-        next();
-    }//GEN-LAST:event_btnNextActionPerformed
-
-    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
-        // TODO add your handling code here:
-        last();
-    }//GEN-LAST:event_btnLastActionPerformed
-
     private void tblChuyenDeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblChuyenDeMouseClicked
         // TODO add your handling code here:
         if (evt.getClickCount() == 1) {
@@ -380,6 +345,51 @@ public class QuanLyChuyenDe extends javax.swing.JFrame {
             this.edit();
         }
     }//GEN-LAST:event_tblChuyenDeMouseClicked
+
+    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
+        // TODO add your handling code here:
+        last();
+    }//GEN-LAST:event_btnLastActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        // TODO add your handling code here:
+        next();
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
+        // TODO add your handling code here:
+        prev();
+    }//GEN-LAST:event_btnPrevActionPerformed
+
+    private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
+        // TODO add your handling code here:
+        first();
+    }//GEN-LAST:event_btnFirstActionPerformed
+
+    private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
+        // TODO add your handling code here:
+        clearForm();
+    }//GEN-LAST:event_btnMoiActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+        delete();
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+        update();
+    }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+        insert();
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void lblAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAnhMouseClicked
+        // TODO add your handling code here:
+        chonAnh();
+    }//GEN-LAST:event_lblAnhMouseClicked
 
     /**
      * @param args the command line arguments
@@ -486,15 +496,7 @@ public class QuanLyChuyenDe extends javax.swing.JFrame {
 
     // Chức năng thêm mới chuyên đề
     void insert() {
-
         ChuyenDe cd = getData();
-//        String paswordAuthentication = new String(txtXacThucMatKhau.getPassword());
-//        if (!paswordAuthentication.equals(cd.getMatKhau())) {
-//            MsgBox.alert(this, "Xác nhận mật khẩu không đúng!");
-//        } else {
-//            
-//        }
-
         try {
             if (validateForm()) {
                 cdDAO.insert(cd);
@@ -533,13 +535,6 @@ public class QuanLyChuyenDe extends javax.swing.JFrame {
     // Hàm cập nhật chuyên đề
     void update() {
         ChuyenDe cd = getData();
-//        String paswordAuthentication = new String(txtXacThucMatKhau.getPassword());
-//        if (!paswordAuthentication.equals(cd.getMatKhau())) {
-//            MsgBox.alert(this, "Xác nhận mật khẩu không đúng!");
-//        } else {
-//
-//        }
-
         try {
             cdDAO.update(cd);
             MsgBox.alert(this, "Cập nhật nhân viên thành công");
@@ -601,7 +596,10 @@ public class QuanLyChuyenDe extends javax.swing.JFrame {
         txtThoiLuong.setText(String.valueOf(cd.getThoiLuong()));
         txtHocPhi.setText(String.valueOf(cd.getHocPhi()));
         txtMoTa.setText(cd.getMoTaChuyenDe());
-//        lblAnh.set
+        if (cd.getHinhLogo() != null) {
+            lblAnh.setToolTipText(cd.getHinhLogo());
+            lblAnh.setIcon(XImage.read(cd.getHinhLogo()));// Hiên thị hình và ghi tên hình vào tool tip lên Lable chứa hình
+        }
 
     }
 
@@ -613,6 +611,7 @@ public class QuanLyChuyenDe extends javax.swing.JFrame {
         cd.setThoiLuong(Integer.parseInt(txtThoiLuong.getText()));
         cd.setHocPhi(Float.parseFloat(txtHocPhi.getText()));
         cd.setMoTaChuyenDe(txtMoTa.getText());
+        cd.setHinhLogo(lblAnh.getToolTipText());// Lấy tên hiển thị hình từ ToolTip của Lable chứa hình
         return cd;
     }
 
