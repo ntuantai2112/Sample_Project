@@ -15,6 +15,8 @@ import com.eduSys.entity.NguoiHoc;
 import com.eduSys.entity.NhanVien;
 import com.eduSys.poly.utils.MsgBox;
 import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -56,8 +58,8 @@ public class QuanLyHocVien extends javax.swing.JFrame {
         btnTimKiem = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblNguoiHoc = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
         btnThemHV = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
@@ -125,9 +127,9 @@ public class QuanLyHocVien extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(309, Short.MAX_VALUE)
+                .addContainerGap(297, Short.MAX_VALUE)
                 .addComponent(tbnXoaHV, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnSuaDiem, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,16 +141,16 @@ public class QuanLyHocVien extends javax.swing.JFrame {
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(265, Short.MAX_VALUE)
+                .addContainerGap(330, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tbnXoaHV)
                     .addComponent(btnSuaDiem))
-                .addContainerGap())
+                .addGap(14, 14, 14))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(61, Short.MAX_VALUE)))
+                    .addContainerGap(7, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(53, Short.MAX_VALUE)))
         );
 
         tabs.addTab("Học Viên", jPanel4);
@@ -176,6 +178,8 @@ public class QuanLyHocVien extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tblNguoiHoc);
 
+        btnThemHV.setText("Thêm vào khóa học");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -189,6 +193,10 @@ public class QuanLyHocVien extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                         .addComponent(btnTimKiem)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnThemHV)
+                .addGap(79, 79, 79))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,8 +206,10 @@ public class QuanLyHocVien extends javax.swing.JFrame {
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTimKiem))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnThemHV)
+                .addGap(22, 22, 22))
         );
 
         jButton1.setText("jButton1");
@@ -220,14 +230,12 @@ public class QuanLyHocVien extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(567, 567, 567)
+                .addGap(554, 554, 554)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabs.addTab("Người Học", jPanel5);
-
-        btnThemHV.setText("Thêm vào khóa học");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -245,10 +253,6 @@ public class QuanLyHocVien extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addComponent(tabs)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnThemHV)
-                .addGap(91, 91, 91))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,10 +263,8 @@ public class QuanLyHocVien extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnThemHV)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 398, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -345,9 +347,7 @@ public class QuanLyHocVien extends javax.swing.JFrame {
         this.loadTableNguoiHoc();
         this.setDataComboBoxChuyenDe();
         this.setDataComboBoxKhoaHoc();
-        
-       
-        
+
         this.row = -1;
     }
 
@@ -396,18 +396,43 @@ public class QuanLyHocVien extends javax.swing.JFrame {
 
     // Chức năng set dữ liệu vào Combobox Chuyên Đề
     private void setDataComboBoxKhoaHoc() {
-         ArrayList<ChuyenDe> listChuyenDe = (ArrayList<ChuyenDe>) cdDAO.selectALL();
+        ArrayList<ChuyenDe> listChuyenDe = (ArrayList<ChuyenDe>) cdDAO.selectALL();
         for (ChuyenDe cd : listChuyenDe) {
             String item = cd.getMoTaChuyenDe();
             cboKhoaHoc.addItem(item);
         }
 
     }
-    
-    private void search(){
+
+    private void search() {
         String tenTimKiem = txtTimKiem.getText();
 //        HocVien hv = hvDAO.sellectById(tenTimKiem));
 //        loadTableHocVien();
+    }
+
+    private void fillComboBoxChuyenDe() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboChuyenDe.getModel();
+        model.removeAllElements();
+        List<ChuyenDe> listCD = cdDAO.selectALL();
+        for (ChuyenDe cd : listCD) {
+            model.addElement(cd);
+        }
+    }
+
+    private void fillComboBoxKhoaHoc() {
+
+    }
+
+    private void removeHocVien() {
+
+    }
+
+    private void addHocVien() {
+
+    }
+
+    private void updateDiem() {
+
     }
 
 }

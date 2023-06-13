@@ -4,11 +4,22 @@
  */
 package com.eduSys.ui;
 
+import com.eduSys.dao.ChuyenDeDAO;
 import com.eduSys.dao.KhoaHocDAO;
 import com.eduSys.dao.NguoiHocDAO;
+import com.eduSys.entity.ChuyenDe;
 import com.eduSys.entity.KhoaHoc;
+import com.eduSys.entity.NguoiHoc;
+import com.eduSys.poly.utils.Auth;
 import com.eduSys.poly.utils.MsgBox;
+import com.eduSys.poly.utils.XDate;
+import java.awt.Color;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,9 +28,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class QuanLyKhoaHoc extends javax.swing.JFrame {
 
-    /**
-     * Creates new form QuanLyKhoaHoc
-     */
     public QuanLyKhoaHoc() {
         initComponents();
         init();
@@ -82,6 +90,11 @@ public class QuanLyKhoaHoc extends javax.swing.JFrame {
                 "Mã KH", "Thời Lượng", "Học Phí", "Khai Giảng", "Tạo Bởi", "Ngày Tạo"
             }
         ));
+        tblKhoaHoc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblKhoaHocMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblKhoaHoc);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -101,13 +114,24 @@ public class QuanLyKhoaHoc extends javax.swing.JFrame {
 
         jLabel2.setText("Chuyên đề");
 
+        txtTenCD.setEditable(false);
+        txtTenCD.setForeground(new java.awt.Color(153, 153, 153));
+
         jLabel3.setText("Khai giảng");
+
+        txtNgayKG.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel4.setText("Học phí");
 
+        txtHocPhi.setEditable(false);
+        txtHocPhi.setForeground(new java.awt.Color(153, 153, 153));
         txtHocPhi.setVerifyInputWhenFocusTarget(false);
 
         jLabel5.setText("Thời lượng (giờ)");
+
+        txtThoiLuong.setEditable(false);
+        txtThoiLuong.setForeground(new java.awt.Color(153, 153, 153));
+        txtThoiLuong.setFocusable(false);
 
         jLabel7.setText("Người tạo ");
 
@@ -115,44 +139,90 @@ public class QuanLyKhoaHoc extends javax.swing.JFrame {
 
         jLabel9.setText("Ghi chú");
 
+        txtMaNV.setEditable(false);
+        txtMaNV.setForeground(new java.awt.Color(204, 204, 204));
+
+        txtNgayTao.setEditable(false);
+        txtNgayTao.setForeground(new java.awt.Color(153, 153, 153));
+
         txtGhiChu.setColumns(20);
         txtGhiChu.setRows(5);
         jScrollPane2.setViewportView(txtGhiChu);
 
         btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
         jPanel4.add(btnThem);
 
         btnSua.setText("Sửa");
         btnSua.setEnabled(false);
         btnSua.setSelected(true);
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
         jPanel4.add(btnSua);
 
         btnXoa.setText("Xóa");
         btnXoa.setEnabled(false);
         btnXoa.setSelected(true);
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
         jPanel4.add(btnXoa);
 
         btnMoi.setText("Mới");
+        btnMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMoiActionPerformed(evt);
+            }
+        });
         jPanel4.add(btnMoi);
 
         btnFirst.setText("|<");
         btnFirst.setEnabled(false);
         btnFirst.setSelected(true);
+        btnFirst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFirstActionPerformed(evt);
+            }
+        });
         jPanel6.add(btnFirst);
 
         btnPrev.setText("<<");
         btnPrev.setEnabled(false);
         btnPrev.setSelected(true);
+        btnPrev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrevActionPerformed(evt);
+            }
+        });
         jPanel6.add(btnPrev);
 
         btnNext.setText(">>");
         btnNext.setEnabled(false);
         btnNext.setSelected(true);
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
         jPanel6.add(btnNext);
 
         btnLast.setText(">|");
         btnLast.setEnabled(false);
         btnLast.setSelected(true);
+        btnLast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLastActionPerformed(evt);
+            }
+        });
         jPanel6.add(btnLast);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -250,7 +320,11 @@ public class QuanLyKhoaHoc extends javax.swing.JFrame {
 
         jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
-        cboChuyenDe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboChuyenDe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboChuyenDeActionPerformed(evt);
+            }
+        });
         jPanel3.add(cboChuyenDe);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -275,12 +349,65 @@ public class QuanLyKhoaHoc extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
+                .addComponent(tabs)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cboChuyenDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboChuyenDeActionPerformed
+        // TODO add your handling code here:
+        chonChuyenDe();
+    }//GEN-LAST:event_cboChuyenDeActionPerformed
+
+    private void tblKhoaHocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhoaHocMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 1) {
+            this.row = tblKhoaHoc.getSelectedRow();
+            this.edit();
+        }
+    }//GEN-LAST:event_tblKhoaHocMouseClicked
+
+    private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
+        // TODO add your handling code here:
+        first();
+    }//GEN-LAST:event_btnFirstActionPerformed
+
+    private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
+        // TODO add your handling code here:
+        prev();
+    }//GEN-LAST:event_btnPrevActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        // TODO add your handling code here:
+        next();
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
+        // TODO add your handling code here:
+        last();
+    }//GEN-LAST:event_btnLastActionPerformed
+
+    private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
+        // TODO add your handling code here:
+        clearForm();
+    }//GEN-LAST:event_btnMoiActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+        delete();
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+        update();
+    }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+        insert();
+    }//GEN-LAST:event_btnThemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -354,13 +481,14 @@ public class QuanLyKhoaHoc extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     KhoaHocDAO khDAO = new KhoaHocDAO();
+
     int row = -1;
 
-    //Hàm khởi chạy chương trình
+    //Hàm khởi chạy chương trìkh
     void init() {
         setLocationRelativeTo(null);
-        this.loadTableKhoaHoc();
-        this.row = -1;
+        fillTableKhoaHoc();
+        this.fillComboBoxChuyenDe();
     }
 
     // Chức năng loadTable đổ dữ liệu lên bảng Nhân Viên
@@ -368,15 +496,210 @@ public class QuanLyKhoaHoc extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblKhoaHoc.getModel();
         model.setRowCount(0);
         try {
-            ArrayList<KhoaHoc> list = (ArrayList<KhoaHoc>) khDAO.selectALL();
-            int count = 1;
+            ChuyenDe chuyenDe = (ChuyenDe) cboChuyenDe.getSelectedItem();
+            System.out.println(chuyenDe);
+            List<KhoaHoc> list = khDAO.selectByChuyenDe(chuyenDe.getMaCD());
             for (KhoaHoc kh : list) {
-                model.addRow(new Object[]{kh.getMaKH(),kh.getThoiLuong(),kh.getHocPhi(),kh.getNgayKG(),kh.getMaNV(),kh.getNgayTao()});
+                model.addRow(new Object[]{kh.getMaKH(), kh.getThoiLuong(),
+                    kh.getHocPhi(), XDate.toString(kh.getNgayKG(), "dd/MM/YYYY"), kh.getMaNV(), kh.getNgayTao()});
             }
+
         } catch (Exception e) {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
             e.printStackTrace();
 
         }
     }
+
+    private void fillTableKhoaHoc() {
+        DefaultTableModel model = (DefaultTableModel) tblKhoaHoc.getModel();
+        model.setRowCount(0);
+        try {
+            ChuyenDe chuyenDe = (ChuyenDe) cboChuyenDe.getSelectedItem();
+            List<KhoaHoc> list = khDAO.selectALL();
+            for (KhoaHoc kh : list) {
+                model.addRow(new Object[]{kh.getMaKH(), kh.getThoiLuong(), kh.getHocPhi(), kh.getNgayKG(), kh.getMaNV(), kh.getNgayTao()});
+            }
+
+        } catch (Exception e) {
+            MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
+            e.printStackTrace();
+
+        }
+
+    }
+
+    // Chức năng thêm mới khân viên
+    void insert() {
+
+//        NguoiHoc kh = getData();
+//        try {
+//            if (validateForm()) {
+//                khDAO.insert(kh);
+//                MsgBox.alert(this, "Thêm mới khân viên thàkh công");
+//                loadTableNguoiHoc();
+//                clearForm();
+//            }
+//        } catch (Exception e) {
+//            MsgBox.alert(this, "Thêm mới khân viên thất bại");
+//        }
+    }
+
+    // Hàm xóa khân viên
+    void delete() {
+        if (!Auth.isManager()) {
+            MsgBox.alert(this, "Bạn không có quyền xóa khân viên");
+        } else {
+            Integer maKH = tblKhoaHoc.getSelectedRow();
+            if (maKH.equals(Auth.user.getMaNV())) {
+                MsgBox.alert(this, "Bạn không được xóa chíkh bạn!");
+            } else if (MsgBox.confirm(this, "Bạn chắc chắn muốn xóa khân viên này ?")) {
+                try {
+                    khDAO.delete(1);
+                    MsgBox.alert(this, "Xóa khân viên thàkh công!");
+                    loadTableKhoaHoc();
+                    clearForm();
+
+                } catch (Exception e) {
+                    MsgBox.alert(this, "Xóa khân viên thất bại");
+                }
+            }
+        }
+    }
+
+    void update() {
+//        NguoiHoc kh = getData();
+//        try {
+//            khDAO.update(kh);
+//            MsgBox.alert(this, "Cập khật khân viên thàkh công");
+//            loadTableNguoiHoc();
+//            clearForm();
+//        } catch (Exception e) {
+//            MsgBox.alert(this, "Cập khật khân viên thất bại");
+//        }
+
+    }
+
+// Hàm chức năng làm mới form
+    private void clearForm() {
+        KhoaHoc kh = new KhoaHoc();
+        this.setForm(kh);
+        this.row = -1;
+        this.updateStatus();
+    }
+
+    // tblNhanVien doble Click 
+    private void edit() {
+//
+        int tenKH = (int) tblKhoaHoc.getValueAt(this.row, 0);
+        KhoaHoc kh = khDAO.sellectById(tenKH);
+        this.setForm(kh);
+        tabs.setSelectedIndex(1);
+        this.updateStatus();
+    }
+
+    private void first() {
+
+        this.row = 0;
+        this.edit();
+    }
+
+    private void prev() {
+        if (this.row > 0) {
+            this.row--;
+            this.edit();
+        }
+    }
+
+    private void next() {
+        if (this.row < tblKhoaHoc.getRowCount() - 1) {
+            this.row++;
+            this.edit();
+        }
+
+    }
+
+    private void last() {
+        row = tblKhoaHoc.getRowCount() - 1;
+        this.edit();
+    }
+
+    // Hàm chức năng load dữ liệu lên Form
+    private void setForm(KhoaHoc kh) {
+        int row = tblKhoaHoc.getSelectedRow();
+
+        txtMaNV.setText(kh.getMaNV());
+        txtNgayKG.setText(String.valueOf(kh.getNgayKG()));
+        txtNgayTao.setText(String.valueOf(kh.getNgayTao()));
+
+    }
+    // Chức năng loadTable đổ dữ liệu lên bảng Nhân Viên
+
+    // Lấy dữ liệu từ form
+    private KhoaHoc getData() {
+        KhoaHoc kh = new KhoaHoc();
+//        kh.setM(xt.getText());
+//        kh.setHoTen(txtHoTen.getText());
+
+////       // Thiết lập ngày sikh
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+//        try {
+//            Date ngaySikh = dateFormat.parse(txtNgaySikh.getText());
+//            kh.setNgaySikh(ngaySikh);
+//        } catch (ParseException e) {
+//            // Xử lý khi ngày sikh không hợp lệ
+//            e.printStackTrace();
+//        }
+//        kh.setSoDT(txtDienThoai.getText());
+//        kh.setEmail(txtEmail.getText());
+//        kh.setGhiChu(txtGhiChu.getText());
+        return kh;
+    }
+
+    private void updateStatus() {
+        boolean edit = (this.row >= 0);
+        boolean first = (this.row == 0);
+        boolean last = (this.row == tblKhoaHoc.getRowCount() - 1);
+
+        // Trạng thái form
+        txtMaNV.setEditable(!edit);
+        btnThem.setEnabled(!edit);
+        btnSua.setEnabled(edit);
+        btnXoa.setEnabled(edit);
+
+        // Trạng thái điều hướng
+        btnFirst.setEnabled(edit && !first);
+        btnPrev.setEnabled(edit && !first);
+        btnNext.setEnabled(edit && !last);
+        btnLast.setEnabled(edit && !last);
+
+    }
+
+    // Chức năng hiển thị tên chuyên đề lên combobox
+    ChuyenDeDAO cdDAO = new ChuyenDeDAO();
+
+    private void fillComboBoxChuyenDe() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboChuyenDe.getModel();
+        model.removeAllElements();
+        List<ChuyenDe> listCD = cdDAO.selectALL();
+        for (ChuyenDe cd : listCD) {
+            model.addElement(cd);
+        }
+    }
+
+    private void chonChuyenDe() {
+        ChuyenDe chuyenDe = (ChuyenDe) cboChuyenDe.getSelectedItem();
+        txtThoiLuong.setText(String.valueOf(chuyenDe.getThoiLuong()));
+        txtHocPhi.setText(String.valueOf(chuyenDe.getHocPhi()));
+        txtTenCD.setText(String.valueOf(chuyenDe.getTenCD()));
+        txtGhiChu.setText(String.valueOf(chuyenDe.getTenCD()));
+//        txtNgayKG.setText(String.valueOf(chuyenDe.get()));
+//        txtNgayTao.setText(String.valueOf(chuyenDe.getTenCD()));
+
+        this.loadTableKhoaHoc();
+        this.row = -1;
+        this.updateStatus();
+        tabs.setSelectedIndex(0);
+    }
+
 }

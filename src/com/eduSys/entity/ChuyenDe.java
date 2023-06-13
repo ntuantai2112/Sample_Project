@@ -67,8 +67,7 @@ public class ChuyenDe {
     public void setMoTaChuyenDe(String moTaChuyenDe) {
         this.moTaChuyenDe = moTaChuyenDe;
     }
-    
-    
+
     public ChuyenDe(String maCD, String tenCD, float hocPhi, int thoiLuong, String hinhLogo, String moTaChuyenDe) {
         this.maCD = maCD;
         this.tenCD = tenCD;
@@ -78,5 +77,15 @@ public class ChuyenDe {
         this.moTaChuyenDe = moTaChuyenDe;
     }
 
-    
+    @Override
+    public String toString() {
+        return this.tenCD;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        ChuyenDe other = (ChuyenDe) obj;
+        return other.getMaCD().endsWith(this.getMaCD());
+    }
+
 }

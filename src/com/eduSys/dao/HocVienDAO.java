@@ -88,5 +88,10 @@ public class HocVienDAO extends EduSysDAO<HocVien, String> {
 
         }
     }
+    
+//    public ArrayList<HocVien> selectByKhoaHoc(String keywork){
+//        
+//        return 
+//    }
 
 }

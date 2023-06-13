@@ -98,4 +98,13 @@ public class NguoiHocDAO extends EduSysDAO<NguoiHoc, String> {
         String sql = "SELECT * FROM NGUOIHOC WHERE HOTEN LIKE ?";
         return this.selectBySQL(sql, "%" + keyword + "%");
     }
+    
+     public List<NguoiHoc> selectNotInCourse(String keyword) {
+        String sql = "SELECT * FROM NGUOIHOC WHERE HOTEN LIKE ?";
+        return this.selectBySQL(sql, "%" + keyword + "%");
+    }
+     
+    
+     
+     
 }
