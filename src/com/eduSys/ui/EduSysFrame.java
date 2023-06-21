@@ -507,19 +507,20 @@ public class EduSysFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_mniEmployeeActionPerformed
 
     private void mni_TranscriptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_TranscriptActionPerformed
+          new ThongKeJDiolog().setVisible(true);
         new ThongKeJDiolog().selectTab(0);
     }//GEN-LAST:event_mni_TranscriptActionPerformed
 
     private void mniNumber_LearnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniNumber_LearnerActionPerformed
-         new ThongKeJDiolog().selectTab(1);
+        new ThongKeJDiolog().selectTab(1);
     }//GEN-LAST:event_mniNumber_LearnerActionPerformed
 
     private void mniThemetic_PointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniThemetic_PointActionPerformed
-         new ThongKeJDiolog().selectTab(2);
+        new ThongKeJDiolog().selectTab(2);
     }//GEN-LAST:event_mniThemetic_PointActionPerformed
 
     private void mniRevenueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniRevenueActionPerformed
-         new ThongKeJDiolog().selectTab(3);
+        new ThongKeJDiolog().setVisible(true);
     }//GEN-LAST:event_mniRevenueActionPerformed
 
     private void mni_InstructActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_InstructActionPerformed
@@ -567,7 +568,7 @@ public class EduSysFrame extends javax.swing.JFrame {
 
     private void mniTranscripActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniTranscripActionPerformed
         // TODO add your handling code here:
-//        openThongKe(WIDTH)ThongKe();
+        new ThongKeJDiolog().setVisible(true);
     }//GEN-LAST:event_mniTranscripActionPerformed
 
     /**

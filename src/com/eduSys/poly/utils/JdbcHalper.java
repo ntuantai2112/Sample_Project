@@ -67,6 +67,7 @@ public class JdbcHalper {
         try {
             PreparedStatement stmt = JdbcHalper.getStmt(sql, args);
             try {
+                System.out.println("Thành công");
                 return stmt.executeUpdate();
             } finally {
                 stmt.getConnection().close();

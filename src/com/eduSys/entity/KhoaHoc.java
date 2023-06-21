@@ -98,8 +98,10 @@ public class KhoaHoc {
     public void setNgayTao(Date ngayTao) {
         this.ngayTao = ngayTao;
     }
-    
-    
-   
-    
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.maKH);
+    }
+
 }

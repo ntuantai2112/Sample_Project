@@ -56,6 +56,13 @@ public class HocVien {
         this.maNH = maNH;
         this.diem = diem;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.maNH);
+    }
+
+   
     
     
 

@@ -108,6 +108,11 @@ public class NguoiHoc {
     public void setNgayDk(Date ngayDk) {
         this.ngayDk = ngayDk;
     }
+
+
+    
+    
+    
     
     
 

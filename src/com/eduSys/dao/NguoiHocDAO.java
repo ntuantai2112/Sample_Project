@@ -22,7 +22,7 @@ public class NguoiHocDAO extends EduSysDAO<NguoiHoc, String> {
     String UPDATE_SQL = "UPDATE NGUOIHOC SET HOTEN = ?, NGAYSINH = ?, GIOITINH = ?,SDT = ?,EMAIL = ?,GHICHU = ?,MANV = ?,NGAYDK = ? WHERE MANH = ?";
     String DELETE_SQL = "DELETE FROM NGUOIHOC WHERE MANH = ?  ";
     String SELECT_ALL = "SELECT MANH,HOTEN,NGAYSINH,GIOITINH,SDT,EMAIL,GHICHU,MANV,NGAYDK FROM NGUOIHOC";
-    String SELECT_BY_ID_SQL = "SELECT HOTEN,NGAYSINH,GIOITINH,SDT,EMAIL,GHICHU,MANV,NGAYDK FROM NGUOIHOC FROM NGUOIHOC WHERE MANH = ?";
+    String SELECT_BY_ID_SQL = "SELECT HOTEN,NGAYSINH,GIOITINH,SDT,EMAIL,GHICHU,MANV,NGAYDK FROM NGUOIHOC WHERE MANH = ?";
 
     @Override
     public void insert(NguoiHoc nh) {
@@ -68,13 +68,12 @@ public class NguoiHocDAO extends EduSysDAO<NguoiHoc, String> {
 
     // Truy vấn dữ liệu từ CSDL và biến nó thành List entity, hàm này trả về 1 listNV 
     @Override
-    public List<NguoiHoc> selectBySQL(String sql, Object... args) {
+    public List<NguoiHoc> selectBySQL(String sql, Object... args) { 
         List<NguoiHoc> listNH = new ArrayList<>();
         try {
             ResultSet rs = JdbcHalper.query(sql, args);
             while (rs.next()) {
                 NguoiHoc nh = new NguoiHoc();
-                nh.setMaNH(rs.getString("MaNH"));
                 nh.setHoTen(rs.getString("HoTen"));
                 nh.setNgaySinh(rs.getDate("NgaySinh"));
                 nh.setGioiTinh(rs.getBoolean("GIOITINH"));
@@ -83,6 +82,7 @@ public class NguoiHocDAO extends EduSysDAO<NguoiHoc, String> {
                 nh.setGhiChu(rs.getString("GhiChu"));
                 nh.setMaNV(rs.getString("MaNV"));
                 nh.setNgayDk(rs.getDate("NgayDK"));
+                nh.setMaNH(rs.getString("MANH"));
 
                 listNH.add(nh);
             }
@@ -95,16 +95,15 @@ public class NguoiHocDAO extends EduSysDAO<NguoiHoc, String> {
     }
 
     public List<NguoiHoc> selectByKeyWord(String keyword) {
-        String sql = "SELECT * FROM NGUOIHOC WHERE HOTEN LIKE ?";
+        String sql = "SELECT MANH,HOTEN,NGAYSINH,GIOITINH,SDT,EMAIL,GHICHU,MANV,NGAYDK FROM NGUOIHOC WHERE HOTEN LIKE ?";
         return this.selectBySQL(sql, "%" + keyword + "%");
     }
-    
-     public List<NguoiHoc> selectNotInCourse(String keyword) {
-        String sql = "SELECT * FROM NGUOIHOC WHERE HOTEN LIKE ?";
-        return this.selectBySQL(sql, "%" + keyword + "%");
+
+    public List<NguoiHoc> selectNotInCourse(int maKH, String keyword) {
+        String sql = "SELECT * FROM NGUOIHOC \n"
+                + "WHERE HOTEN LIKE ? AND \n"
+                + "MANH NOT IN(SELECT MANH FROM HOCVIEN WHERE MAKH = ?)";
+        return this.selectBySQL(sql, "%" + keyword + "%", maKH);
     }
-     
-    
-     
-     
+
 }

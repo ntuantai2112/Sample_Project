@@ -24,9 +24,9 @@ import javax.swing.table.DefaultTableModel;
  * @author LENOVO T560
  */
 public class QuanLyHocVien extends javax.swing.JFrame {
-
+    
     public QuanLyHocVien() {
-
+        
         initComponents();
         init();
     }
@@ -71,6 +71,12 @@ public class QuanLyHocVien extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chuyên Đề", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14))); // NOI18N
         jPanel2.setToolTipText("Chuyên Đề");
         jPanel2.setName("Chuyên Đề"); // NOI18N
+
+        cboChuyenDe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboChuyenDeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -179,6 +185,11 @@ public class QuanLyHocVien extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tblNguoiHoc);
 
         btnThemHV.setText("Thêm vào khóa học");
+        btnThemHV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemHVActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -275,6 +286,16 @@ public class QuanLyHocVien extends javax.swing.JFrame {
         search();
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
+    private void cboChuyenDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboChuyenDeActionPerformed
+        // TODO add your handling code here:
+        fillComboBoxKhoaHoc();
+    }//GEN-LAST:event_cboChuyenDeActionPerformed
+
+    private void btnThemHVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemHVActionPerformed
+        // TODO add your handling code here:
+        addHocVien();
+    }//GEN-LAST:event_btnThemHVActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -334,21 +355,18 @@ public class QuanLyHocVien extends javax.swing.JFrame {
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 
-    HocVienDAO hvDAO = new HocVienDAO();
-    NguoiHocDAO nhDAO = new NguoiHocDAO();
     ChuyenDeDAO cdDAO = new ChuyenDeDAO();
     KhoaHocDAO khDAO = new KhoaHocDAO();
+    NguoiHocDAO nhDAO = new NguoiHocDAO();
+    HocVienDAO hvDAO = new HocVienDAO();
     int row = -1;
 
     //Hàm khởi chạy chương trình
     void init() {
         setLocationRelativeTo(null);
-        this.loadTableHocVien();
-        this.loadTableNguoiHoc();
-        this.setDataComboBoxChuyenDe();
-        this.setDataComboBoxKhoaHoc();
-
-        this.row = -1;
+        this.fillComboBoxChuyenDe();
+        
+        
     }
 
     // Chức năng loadTable đổ dữ liệu lên bảng Nhân Viên
@@ -356,15 +374,23 @@ public class QuanLyHocVien extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblHocVien.getModel();
         model.setRowCount(0);
         try {
-            ArrayList<HocVien> list = (ArrayList<HocVien>) hvDAO.selectALL();
-            int count = 1;
-            for (HocVien nh : list) {
-                model.addRow(new Object[]{count++, nh.getMaHV(), nh.getMaNH(), new NguoiHoc().getHoTen(), nh.getDiem()});
+            KhoaHoc khoaHoc = (KhoaHoc) cboKhoaHoc.getSelectedItem();
+            if (khoaHoc != null) {
+                List<HocVien> listHV = hvDAO.selectByKhoaHoc(khoaHoc.getMaKH());
+                for (int i = 0; i < listHV.size(); i++) {
+                    HocVien hv = listHV.get(i);
+                    String maNH = String.valueOf(hv.getMaNH());
+                    String hoTen = nhDAO.sellectById(maNH).getHoTen();
+                    System.out.println(hoTen);
+                    model.addRow(new Object[]{i + 1, hv.getMaHV(), hv.getMaNH(), hoTen, hv.getDiem()});
+                }
+                
             }
+            this.loadTableNguoiHoc();
         } catch (Exception e) {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
             e.printStackTrace();
-
+            
         }
     }
 
@@ -373,66 +399,74 @@ public class QuanLyHocVien extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblNguoiHoc.getModel();
         model.setRowCount(0);
         try {
-            ArrayList<NguoiHoc> list = (ArrayList<NguoiHoc>) nhDAO.selectALL();
-            for (NguoiHoc nh : list) {
-                model.addRow(new Object[]{nh.getMaNV(), nh.getHoTen(), nh.isGioiTinh() ? "Nam" : "Nữ", nh.getNgaySinh(), nh.getSoDT(), nh.getEmail(),});
+            KhoaHoc khoaHoc = (KhoaHoc) cboKhoaHoc.getSelectedItem();
+            String keyWork = txtTimKiem.getText();
+            List<NguoiHoc> listNH = nhDAO.selectNotInCourse(khoaHoc.getMaKH(), keyWork);
+            for (NguoiHoc nh : listNH) {
+                model.addRow(new Object[]{nh.getMaNH(), nh.getHoTen(), nh.isGioiTinh() ? "Nam" : "Nữ",
+                    nh.getNgaySinh(), nh.getSoDT(), nh.getEmail()});
             }
         } catch (Exception e) {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
             e.printStackTrace();
-
+            
         }
     }
 
     // Chức năng set dữ liệu vào Combobox Chuyên Đề
-    private void setDataComboBoxChuyenDe() {
-        ArrayList<ChuyenDe> listChuyenDe = (ArrayList<ChuyenDe>) cdDAO.selectALL();
-        for (ChuyenDe cd : listChuyenDe) {
-            String item = cd.getTenCD();
-            cboChuyenDe.addItem(item);
-        }
-
-    }
-
-    // Chức năng set dữ liệu vào Combobox Chuyên Đề
-    private void setDataComboBoxKhoaHoc() {
-        ArrayList<ChuyenDe> listChuyenDe = (ArrayList<ChuyenDe>) cdDAO.selectALL();
-        for (ChuyenDe cd : listChuyenDe) {
-            String item = cd.getMoTaChuyenDe();
-            cboKhoaHoc.addItem(item);
-        }
-
-    }
-
-    private void search() {
-        String tenTimKiem = txtTimKiem.getText();
-//        HocVien hv = hvDAO.sellectById(tenTimKiem));
-//        loadTableHocVien();
-    }
-
     private void fillComboBoxChuyenDe() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboChuyenDe.getModel();
         model.removeAllElements();
         List<ChuyenDe> listCD = cdDAO.selectALL();
         for (ChuyenDe cd : listCD) {
             model.addElement(cd);
-        }
+        }               
+        this.fillComboBoxKhoaHoc();
+        
     }
 
+    // Chức năng set dữ liệu vào Combobox Chuyên Đề
     private void fillComboBoxKhoaHoc() {
-
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboKhoaHoc.getModel();
+        model.removeAllElements();
+        ChuyenDe chuyenDe = (ChuyenDe) cboChuyenDe.getSelectedItem();
+        if (chuyenDe != null) {
+            List<KhoaHoc> listKH = khDAO.selectByChuyenDe(chuyenDe.getMaCD());
+            for (KhoaHoc khoaHoc : listKH) {
+                model.addElement(khoaHoc);
+            }
+            this.loadTableHocVien();    
+            
+        }
+        
     }
-
+    
+    private void search() {
+        String tenTimKiem = txtTimKiem.getText();
+//        HocVien hv = hvDAO.sellectById(tenTimKiem));
+//        loadTableHocVien();
+    }
+    
     private void removeHocVien() {
-
+        
     }
-
+    
     private void addHocVien() {
-
+        KhoaHoc khoaHoc = (KhoaHoc) cboKhoaHoc.getSelectedItem();
+        for (int row : tblNguoiHoc.getSelectedRows()) {
+            HocVien hv = new HocVien();
+            hv.setMaHV(khoaHoc.getMaKH());
+            hv.setDiem(0);
+            hv.setMaNH((String) tblNguoiHoc.getValueAt(row, 0));
+            hvDAO.insert(hv);
+            
+        }
+        this.loadTableHocVien();
+        this.tabs.setSelectedIndex(1);
     }
-
+    
     private void updateDiem() {
-
+        
     }
-
+    
 }

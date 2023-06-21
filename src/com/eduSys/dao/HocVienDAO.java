@@ -22,7 +22,7 @@ public class HocVienDAO extends EduSysDAO<HocVien, String> {
     String UPDATE_SQL = "UPDATE HOCVIEN SET MAKH = ?, MANH = ?, DIEM = ? WHERE MAHV = ?";
     String DELETE_SQL = "DELETE FROM HOCVIEN WHERE MAHV = ?  ";
     String SELECT_ALL = "SELECT MaHV,MaKH,MaNH,Diem FROM HOCVIEN";
-    String SELECT_BY_ID_SQL = "SELECT * FROM HOCVIEN WHERE MAHV = ?";
+    String SELECT_BY_ID_SQL = "SELECT MaHV,MaKH,Diem FROM HOCVIEN WHERE MAHV = ?";
 
     @Override
     public void insert(HocVien hv) {
@@ -88,10 +88,10 @@ public class HocVienDAO extends EduSysDAO<HocVien, String> {
 
         }
     }
-    
-//    public ArrayList<HocVien> selectByKhoaHoc(String keywork){
-//        
-//        return 
-//    }
+
+    public List<HocVien> selectByKhoaHoc(int maKH) {
+        String sql = "SELECT * FROM HOCVIEN WHERE MAKH = ?";
+        return this.selectBySQL(sql, maKH);
+    }
 
 }

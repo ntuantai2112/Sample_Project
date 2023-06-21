@@ -634,7 +634,7 @@ public class QuanLyNguoiHoc extends javax.swing.JDialog {
             String keyWord = txtTimKiem.getText();
             ArrayList<NguoiHoc> list = (ArrayList<NguoiHoc>) nhDAO.selectALL();
             for (NguoiHoc nh : list) {
-                model.addRow(new Object[]{nh.getMaNV(), nh.getHoTen(), nh.isGioiTinh() ? "Nam" : "Nữ", nh.getNgaySinh(), nh.getSoDT(), nh.getEmail(), nh.getMaNV(), nh.getNgayDk()});
+                model.addRow(new Object[]{nh.getMaNH(), nh.getHoTen(), nh.isGioiTinh() ? "Nam" : "Nữ", nh.getNgaySinh(), nh.getSoDT(), nh.getEmail(), nh.getMaNV(), nh.getNgayDk()});
             }
         } catch (Exception e) {
             MsgBox.alert(this, "Lỗi truy vấn dữ liệu");
